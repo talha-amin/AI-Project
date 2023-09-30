@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import logo from "../../assets/logo.svg";
 import "./navbar.css";
+import Modal from "../modal/Modal";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -31,8 +32,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="gpt3__navbar-sign">
-        <p>Sign in</p>
-        <button type="button">Sign up</button>
+        <Modal />
       </div>
       <div className="gpt3__navbar-menu">
         {toggleMenu ? (
