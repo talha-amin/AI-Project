@@ -4,20 +4,16 @@ import "./features.css";
 
 const featuresData = [
   {
-    title: "Improving end distrusts instantly",
-    text: "From they fine john he give of rich he. They age and draw mrs like. Improving end distrusts may instantly was household applauded.",
+    title: "Inclusive",
+    text: "At iSai, inclusivity isn't just a buzzword; it's the heart of our mission. We believe in the ethical use of media technology, ensuring the every voice is heard and every perspective is respected. Our commitment to inclusivity means creating content and platforms that unite people, fostering diversity, and championing ethical values. Join us on our journey towards a media landscape where everyone feels represented and respected",
   },
   {
-    title: "Become the tended active",
-    text: "Considered sympathize ten uncommonly occasional assistance sufficient not. Letter of on become he tended active enable to.",
+    title: "Smart",
+    text: "We've revolutionized the way content creators are compensated. Say goodbye to opaque payment systems and hello to transparency and trust. Our smart contracts ensure that contributors receive the fair share automatically and securely.It's media made smarter, fairer and more efficient- that's the iSai way.",
   },
   {
-    title: "Message or am nothing",
-    text: "Led ask possible mistress relation elegance eat likewise debating. By message or am nothing amongst chiefly address.",
-  },
-  {
-    title: "Really boy law county",
-    text: "Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now. In built table in an rapid blush..",
+    title: "AI",
+    text: "Our AI-driven solutions are the future of content creation and curation. From personalised recommendations that anticipate your preferences to content analysis that ensures qualtiy and relevance, AI is at our core. Experience the magic of AI as it enhances your media journey, making it more intelligent, engaging and tailored to you. Join us in embracing the AI revolution, one innovation at a time",
   },
 ];
 

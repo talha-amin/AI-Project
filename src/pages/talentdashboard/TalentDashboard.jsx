@@ -1,12 +1,17 @@
-import React from "react";
-import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
-import Sidebar from "../../components/sidebar/Sidebar";
-
+import React, { useState } from "react";
+import { WhatGPT3 } from "../../containers";
+import { Header } from "../../containers";
+import { Navbar } from "../../components";
 const TalentDashboard = () => {
+  const [selectedCard, setSelectedCard] = useState(null);
+
   return (
-    <div>
-      <h1>Talent Dashboard</h1>
-      <Sidebar type="talent" />
+    <div className="App">
+      <div className="gradient__bg">
+        <Navbar type="Talent" />
+        <Header selectedCard={selectedCard} setSelectedCard={setSelectedCard} />
+      </div>
+      <WhatGPT3 selectedCard={selectedCard} />
     </div>
   );
 };

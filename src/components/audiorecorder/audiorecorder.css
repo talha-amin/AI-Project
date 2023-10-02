@@ -1,0 +1,16 @@
+/* App.css */
+button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+button.recording {
+  transform: scale(1.1);
+  background-color: #ff5733;
+}

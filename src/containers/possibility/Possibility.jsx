@@ -10,12 +10,15 @@ const Possibility = () => (
     <div className="gpt3__possibility-content">
       <h4>Request Early Access to Get Started</h4>
       <h1 className="gradient__text">
-        The possibilities are <br /> beyond your imagination
+        "How might we ethically leverage artification intelligence technologies
+        to transform the business within the media industry?"
       </h1>
       <p>
-        Yet bed any for travelling assistance indulgence unpleasing. Not
-        thoughts all exercise blessing. Indulgence way everything joy alteration
-        boisterous the attachment. Party we years to order allow asked of.
+        In the world of AI and blockchain, ethics play a starring role. For AI,
+        it;s about being fair,honest and accoutnable, while protecting privacy
+        and avoiding biases. For Blockchain, it's all about keeping things
+        secure, transparent and responsible with data. We're all about balancing
+        innovation with ethics to make tech work for everyone!
       </p>
       <h4>Request Early Access to Get Started</h4>
     </div>
