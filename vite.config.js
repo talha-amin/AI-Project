@@ -16,6 +16,14 @@ export default defineConfig({
         "firebase/app",
         "firebase/analytics",
       ],
+      optimizeDeps: {
+        include: [
+          "firebase/app",
+          "firebase/auth",
+          "firebase/firestore",
+          "firebase/analytics",
+        ],
+      },
       output: {
         manualChunks: {
           vendor: ["react", "react-dom"],
