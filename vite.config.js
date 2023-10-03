@@ -8,27 +8,4 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/setupTests.js"],
   },
-  build: {
-    rollupOptions: {
-      external: [
-        "firebase/auth",
-        "firebase/firestore",
-        "firebase/app",
-        "firebase/analytics",
-      ],
-      optimizeDeps: {
-        include: [
-          "firebase/app",
-          "firebase/auth",
-          "firebase/firestore",
-          "firebase/analytics",
-        ],
-      },
-      output: {
-        manualChunks: {
-          vendor: ["react", "react-dom"],
-        },
-      },
-    },
-  },
 });
