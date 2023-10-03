@@ -32,14 +32,24 @@ function AudioRecorder() {
 
   return (
     <div>
-      {recording ? (
+      {audioURL && <audio controls src={audioURL}></audio>}
+
+      {audioURL ? (
+        <button
+          onClick={() => {
+            setAudioURL("");
+            audioChunksRef.current = [];
+          }}
+        >
+          Try Again
+        </button>
+      ) : recording ? (
         <button className="recording" onClick={stopRecording}>
           Stop Recording
         </button>
       ) : (
         <button onClick={startRecording}>Start Recording</button>
       )}
-      {audioURL && <audio controls src={audioURL}></audio>}
     </div>
   );
 }

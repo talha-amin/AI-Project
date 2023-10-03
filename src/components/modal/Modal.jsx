@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "./modal.css";
 import { useNavigate } from "react-router-dom";
-
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAuth } from "../google/authcontext";
+import { Login, Logout } from "../index";
+import { useAccount } from "wagmi";
 const Modal = () => {
+  const address = useAccount();
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const handleTalentClick = () => {
     setShowModal(false);
@@ -29,26 +34,41 @@ const Modal = () => {
       {showModal && (
         <div className="modal-backdrop">
           <div className="modal gradient__bg">
-            <div className="modal-sections">
-              <div>
-                <div className="modal-header gradient__text">
-                  Register as Talent
+            {!currentUser && (
+              <>
+                <div className="connect-wallet ">
+                  <ConnectButton />
                 </div>
-                <div className="modal-content">
-                  <button onClick={handleTalentClick}>
-                    Go to Talent Dashboard
-                  </button>
+                <div className="login ">{address.address && <Login />}</div>
+              </>
+            )}
+            {currentUser && (
+              <>
+                <div className="modal-sections">
+                  <div>
+                    <div className="modal-header gradient__text">
+                      Register as Talent
+                    </div>
+                    <div className="modal-content">
+                      <button onClick={handleTalentClick}>
+                        Go to Talent Dashboard
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="modal-header gradient__text">
+                      Use as Podcast Creator
+                    </div>
+                    <div className="modal-content">
+                      <button onClick={handleUserClick}>User Dashboard</button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <div className="modal-header gradient__text">
-                  Use as Podcast Creator
+                <div className="logout">
+                  <Logout />
                 </div>
-                <div className="modal-content">
-                  <button onClick={handleUserClick}>User Dashboard</button>
-                </div>
-              </div>
-            </div>
+              </>
+            )}
             <div className="modal-close">
               <button type="button" onClick={() => setShowModal(false)}>
                 <span>❌</span>

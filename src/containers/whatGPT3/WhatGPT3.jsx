@@ -44,7 +44,7 @@ const WhatGPT3 = ({ selectedCard }) => {
         <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
           <div className="gpt3__whatgpt3-feature">
             <Feature
-              title="What is ISai"
+              title="What is iSai"
               text="Experience the future of content creation, where AI-powered wizardy meets blockchain-powered royalties! Our user-friendly platform empowers artists to upload their original content seamlessly integrates AI enhancements,mints NFTsfor unique creations, tracks content distribution acorss platforms effortlessly calculates artist royalties, and ensures transparent and efficient royalty distribution through blockchain technology"
             />
           </div>

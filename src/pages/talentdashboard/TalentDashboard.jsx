@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { WhatGPT3 } from "../../containers";
-import { Header } from "../../containers";
+import { WhatGPT3, Header, NFTContainer } from "../../containers";
 import { Navbar } from "../../components";
+
 const TalentDashboard = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -12,6 +12,7 @@ const TalentDashboard = () => {
         <Header selectedCard={selectedCard} setSelectedCard={setSelectedCard} />
       </div>
       <WhatGPT3 selectedCard={selectedCard} />
+      <NFTContainer />
     </div>
   );
 };

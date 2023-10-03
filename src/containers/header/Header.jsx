@@ -2,21 +2,15 @@ import React from "react";
 import people from "../../assets/people.png";
 import ai from "../../assets/ai.png";
 import "./header.css";
-import { useAddress } from "@thirdweb-dev/react";
 import { useLocation } from "react-router-dom"; // Import useLocation
 
 const Header = ({ selectedCard, setSelectedCard }) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
   const isLanding = location.pathname === "/";
-  const address = useAddress();
 
   const handleCardClick = (cardNumber) => {
-    if (!address) {
-      alert("Please Connect Wallet");
-    } else {
-      setSelectedCard(cardNumber);
-    }
+    setSelectedCard(cardNumber);
   };
 
   return (
@@ -25,7 +19,7 @@ const Header = ({ selectedCard, setSelectedCard }) => {
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <h1 className="gradient__text">
-              Experience the future of content creation. ISai your All-in-One
+              Experience the future of content creation. iSai your All-in-One
               Content Magic.
             </h1>
             <p>

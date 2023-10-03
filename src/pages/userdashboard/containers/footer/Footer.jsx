@@ -1,5 +1,5 @@
 import React from "react";
-import gpt3Logo from "../../../../assets/logo.svg";
+import gpt3Logo from "../../../../assets/Logo.png";
 import "./footer.css";
 
 const Footer = () => (

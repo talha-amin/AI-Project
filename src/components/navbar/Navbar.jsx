@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/Logo.png";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import Modal from "../modal/Modal";
-import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Logout } from "..";
 
 const Navbar = ({ type }) => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const defaultLinks = [
     { href: "#home", label: "Home" },
-    { href: "#wgpt3", label: "What is I_on_U?" },
+    { href: "#wgpt3", label: "What is iSai?" },
     { href: "#possibility", label: "Tech with a heart" },
     { href: "#features", label: "Case Studies" },
     { href: "#blog", label: "White Paper" },
@@ -50,7 +51,11 @@ const Navbar = ({ type }) => {
     <div className="gpt3__navbar">
       <div className="gpt3__navbar-links">
         <div className="gpt3__navbar-links_logo">
-          <img src={logo} alt="Logo" />
+          <img
+            src={logo}
+            style={{ width: "200px", height: "100px" }}
+            alt="Logo"
+          />
         </div>
         {!type && renderLinks(defaultLinks)}
         {type === "Talent" && <>{renderLinks([...talentLinks])}</>}
@@ -59,7 +64,14 @@ const Navbar = ({ type }) => {
       <div className="gpt3__navbar-sign">
         {!type && <Modal />}
         {(type === "Talent" || type === "User") && (
-          <ConnectWallet theme={darkTheme} btnTitle="Connect Wallet" />
+          <>
+            <div style={{ marginRight: "20px" }}>
+              <ConnectButton />
+            </div>
+            <div>
+              <Logout />
+            </div>
+          </>
         )}
       </div>
 
