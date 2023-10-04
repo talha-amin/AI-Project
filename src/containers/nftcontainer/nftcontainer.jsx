@@ -1,4 +1,3 @@
-import React from "react";
 import "./nftcontainer.css";
 const NFTContainer = () => {
   return (

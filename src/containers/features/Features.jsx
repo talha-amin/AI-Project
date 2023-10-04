@@ -1,4 +1,3 @@
-import React from "react";
 import Feature from "../../components/feature/Feature";
 import "./features.css";
 
@@ -12,7 +11,7 @@ const featuresData = [
     text: "We've revolutionized the way content creators are compensated. Say goodbye to opaque payment systems and hello to transparency and trust. Our smart contracts ensure that contributors receive the fair share automatically and securely.It's media made smarter, fairer and more efficient- that's the iSai way.",
   },
   {
-    title: "AI",
+    title: "Artificial Intelligence",
     text: "Our AI-driven solutions are the future of content creation and curation. From personalised recommendations that anticipate your preferences to content analysis that ensures qualtiy and relevance, AI is at our core. Experience the magic of AI as it enhances your media journey, making it more intelligent, engaging and tailored to you. Join us in embracing the AI revolution, one innovation at a time",
   },
 ];

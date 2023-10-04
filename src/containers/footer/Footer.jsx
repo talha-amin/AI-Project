@@ -1,4 +1,3 @@
-import React from "react";
 import gpt3Logo from "../../assets/Logo.png";
 import "./footer.css";
 
@@ -18,7 +17,7 @@ const Footer = () => (
       <div className="gpt3__footer-links_logo">
         <img
           src={gpt3Logo}
-          style={{ width: "200px", height: "100px" }}
+          style={{ width: "190px", height: "70px" }}
           alt="gpt3_logo"
         />
         <p>
@@ -40,9 +39,9 @@ const Footer = () => (
       </div>
       <div className="gpt3__footer-links_div">
         <h4>Get in touch</h4>
-        <p>Crechterwoord K12 182 DK Alknjkcb</p>
+        <p>jhonny@jmaroun.com</p>
         <p>085-132567</p>
-        <p>info@payme.net</p>
+        <p>www.jmaroun.com</p>
       </div>
     </div>
 

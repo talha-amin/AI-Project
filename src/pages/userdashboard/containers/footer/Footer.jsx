@@ -1,4 +1,3 @@
-import React from "react";
 import gpt3Logo from "../../../../assets/Logo.png";
 import "./footer.css";
 

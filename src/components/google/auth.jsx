@@ -1,4 +1,3 @@
-import React from "react";
 import { auth, db } from "./firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -27,13 +26,11 @@ const wagmiConfig = createConfig({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider coolMode chains={chains}>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
-  </React.StrictMode>
+  <WagmiConfig config={wagmiConfig}>
+    <RainbowKitProvider coolMode chains={chains}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </RainbowKitProvider>
+  </WagmiConfig>
 );
