@@ -46,7 +46,9 @@ const Header = ({ selectedCard, setSelectedCard }) => {
           <div className="gpt3__header-content">
             {" "}
             <h1 className="gradient__text">
-              Let&apos;s Register Your Voice,Text or Art
+              Embark on a journey where your voice, text, and art transcend
+              boundaries. With Vocalize, Scriptize, and Visionize, present them
+              as canvases, allowing podcasters to create captivating narratives
             </h1>
             <p>Please select the talent you want to register for</p>
             <div className="gpt3__cards-container">
@@ -60,11 +62,8 @@ const Header = ({ selectedCard, setSelectedCard }) => {
                 <div className="gpt3__header-image">
                   {/* <img src={people} alt="People" /> */}
                 </div>
-                <h2 className="gradient__text">Voice</h2>
-                <p>
-                  {" "}
-                  Have an amazing voice our users can use for their podcast?
-                </p>
+                <h2 className="gradient__text">Vocalize</h2>
+                <p>Record or Upload a Clear Sample to Clone a Voice! </p>
                 <button>Select</button>
               </div>
 
@@ -77,9 +76,10 @@ const Header = ({ selectedCard, setSelectedCard }) => {
                 <div className="gpt3__header-image">
                   {/* <img src={ai} alt="AI" /> */}
                 </div>
-                <h2 className="gradient__text">Text</h2>
+                <h2 className="gradient__text">Scriptize</h2>
                 <p>
-                  Have an amazing script our users can use in their podcast?
+                  Submit Your Inspiring Script: Ignite the Path to Ultimate
+                  Achievement!
                 </p>
                 <button>Select</button>
               </div>
@@ -95,8 +95,11 @@ const Header = ({ selectedCard, setSelectedCard }) => {
                 <div className="gpt3__header-image">
                   {/* <img src={people} alt="People" /> */}
                 </div>
-                <h2 className="gradient__text">Art</h2>
-                <p>Have an amazing Art our users can use in their podcast?</p>
+                <h2 className="gradient__text">Visionize</h2>
+                <p>
+                  {" "}
+                  Submit Your Artwork and Witness its Magical Transformation!{" "}
+                </p>
                 <button>Select</button>
               </div>
             </div>

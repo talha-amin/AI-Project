@@ -1,7 +1,7 @@
 import Feature from "../../components/feature/Feature";
 import "./whatgpt3.css";
 import { useLocation } from "react-router-dom"; // Import useLocation
-import { AudioRecorder } from "../../components";
+import { AudioRecorder, FileUpload } from "../../components";
 
 const WhatGPT3 = ({ selectedCard }) => {
   const location = useLocation();
@@ -11,13 +11,13 @@ const WhatGPT3 = ({ selectedCard }) => {
   let cardText = "";
   switch (selectedCard) {
     case 1:
-      cardText = "Voice";
+      cardText = "Vocalize";
       break;
     case 2:
-      cardText = "Text";
+      cardText = "Scriptize";
       break;
     case 3:
-      cardText = "Art";
+      cardText = "Visionize";
       break;
     default:
       cardText = ""; // default or any placeholder text
@@ -64,39 +64,29 @@ const WhatGPT3 = ({ selectedCard }) => {
       {isTalentDashboard && (
         <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
           <div className="gpt3__whatgpt3-heading">
-            {cardText === "Voice" && (
+            {cardText === "Vocalize" && (
               <>
-                <h1 className="gradient__text">
-                  Upload or Record your {cardText}{" "}
-                </h1>
-                <AudioRecorder />
-                <input
-                  type="file"
-                  accept="audio/*"
-                  onChange={handleAudioUpload}
-                />
+                <div style={{ animation: "fadeIn 1s forwards" }}>
+                  <h1 className="gradient__text">{cardText} </h1>
+                  <AudioRecorder />
+                  <FileUpload />
+                </div>
               </>
             )}
-            {cardText === "Text" && (
+            {cardText === "Scriptize" && (
               <>
-                <h1 className="gradient__text">
-                  Upload your {cardText} Script{" "}
-                </h1>
-                <input
-                  type="file"
-                  accept=".txt,.md"
-                  onChange={handleTextUpload}
-                />
+                <div style={{ animation: "fadeIn 1s forwards" }}>
+                  <h1 className="gradient__text">{cardText} </h1>
+                  <FileUpload />
+                </div>
               </>
             )}
-            {cardText === "Art" && (
+            {cardText === "Visionize" && (
               <>
-                <h1 className="gradient__text">Upload your {cardText} </h1>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
+                <div style={{ animation: "fadeIn 1s forwards" }}>
+                  <h1 className="gradient__text">{cardText} </h1>
+                  <FileUpload />
+                </div>
               </>
             )}
           </div>

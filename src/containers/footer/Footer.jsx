@@ -20,9 +20,7 @@ const Footer = () => (
           style={{ width: "190px", height: "70px" }}
           alt="gpt3_logo"
         />
-        <p>
-          Crechterwoord K12 182 DK Alknjkcb, <br /> All Rights Reserved
-        </p>
+        <p>Inclusive Smart Artificial Intelligence </p>
       </div>
       <div className="gpt3__footer-links_div">
         <h4>Links</h4>
@@ -40,7 +38,6 @@ const Footer = () => (
       <div className="gpt3__footer-links_div">
         <h4>Get in touch</h4>
         <p>jhonny@jmaroun.com</p>
-        <p>085-132567</p>
         <p>www.jmaroun.com</p>
       </div>
     </div>

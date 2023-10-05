@@ -172,3 +172,6 @@ a {
     margin: 4rem 2rem;
   }
 }
+.modal_background {
+  background: linear-gradient(to bottom, #fff, #f2f2f2);
+}

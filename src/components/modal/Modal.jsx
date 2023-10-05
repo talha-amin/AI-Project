@@ -33,7 +33,7 @@ const Modal = () => {
 
       {showModal && (
         <div className="modal-backdrop">
-          <div className="modal gradient__bg">
+          <div className="modal modal_background">
             {!currentUser && (
               <>
                 <div className="connect-wallet ">
@@ -46,22 +46,14 @@ const Modal = () => {
               <>
                 <div className="modal-sections">
                   <div>
-                    <div className="modal-header gradient__text">
-                      Register as Talent
-                    </div>
                     <div className="modal-content">
                       <button onClick={handleTalentClick}>
                         Go to Talent Dashboard
                       </button>
                     </div>
                   </div>
-                  <div>
-                    <div className="modal-header gradient__text">
-                      Use as Podcast Creator
-                    </div>
-                    <div className="modal-content">
-                      <button onClick={handleUserClick}>User Dashboard</button>
-                    </div>
+                  <div className="modal-content">
+                    <button onClick={handleUserClick}>User Dashboard</button>
                   </div>
                 </div>
                 <div className="logout">
