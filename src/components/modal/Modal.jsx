@@ -48,7 +48,7 @@ const Modal = () => {
                   <div>
                     <div className="modal-content">
                       <button onClick={handleTalentClick}>
-                        Go to Talent Dashboard
+                        Talent Dashboard
                       </button>
                     </div>
                   </div>

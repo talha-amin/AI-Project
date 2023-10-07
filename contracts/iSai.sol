@@ -11,7 +11,7 @@ contract iSai is ERC721Enumerable, Ownable {
     string private URI;
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Name", "Symbol") {}
+    constructor() ERC721("iSai", "iSai") {}
 
     mapping(uint => string) _tokenURIs;
 
@@ -34,7 +34,7 @@ contract iSai is ERC721Enumerable, Ownable {
         _tokenURIs[_tokenId] = _tokenURI;
     }
 
-    function safeMint(string memory _tokenURI) public onlyOwner {
+    function safeMint(string memory _tokenURI) public {
         uint256 _tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, _tokenId);
@@ -42,10 +42,7 @@ contract iSai is ERC721Enumerable, Ownable {
     }
 
     // Single airdrop function
-    function airdropMint(
-        address _address,
-        string memory _tokenURI
-    ) external onlyOwner {
+    function airdropMint(address _address, string memory _tokenURI) external {
         uint256 _tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(_address, _tokenId);
