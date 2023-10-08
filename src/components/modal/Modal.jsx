@@ -8,6 +8,7 @@ import { useAccount } from "wagmi";
 const Modal = () => {
   const address = useAccount();
   const [showModal, setShowModal] = useState(false);
+
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -21,6 +22,9 @@ const Modal = () => {
     navigate("/user-dashboard");
   };
 
+  const handleInfoClick = () => {
+    alert("This button allows you to connect to web3.");
+  };
   return (
     <div>
       <button
@@ -37,6 +41,9 @@ const Modal = () => {
             {!currentUser && (
               <>
                 <div className="connect-wallet ">
+                  <div className="info-icon">
+                    <span onClick={handleInfoClick}>?</span>
+                  </div>
                   <ConnectButton />
                 </div>
                 <div className="login ">{address.address && <Login />}</div>
