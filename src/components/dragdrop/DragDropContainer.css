@@ -1,5 +1,6 @@
 .dropzone {
   width: 300px;
+  max-width: 100%; /* Ensure it doesn't overflow its container */
   height: 200px;
   border: 2px dashed #ccc;
   display: flex;
@@ -16,4 +17,31 @@
 ul {
   list-style-type: none;
   padding: 0;
+}
+
+li {
+  font-size: 16px; /* Added for clarity */
+  padding: 5px 0; /* Added for touch accessibility */
+}
+
+@media screen and (max-width: 650px) {
+  .dropzone {
+    width: 80%; /* Take up 80% of the viewport width */
+  }
+
+  li {
+    font-size: 14px; /* Slightly smaller font size for smaller screens */
+    padding: 4px 0; /* Adjusted padding for smaller screens */
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .dropzone {
+    width: 100%; /* Take up the full viewport width */
+  }
+
+  li {
+    font-size: 12px; /* Even smaller font size for very small screens */
+    padding: 3px 0; /* Adjusted padding for very small screens */
+  }
 }

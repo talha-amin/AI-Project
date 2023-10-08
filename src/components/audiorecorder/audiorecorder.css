@@ -8,9 +8,24 @@ button {
   color: white;
   cursor: pointer;
   outline: none;
+  font-size: 16px; /* Added font size for clarity */
 }
 
 button.recording {
   transform: scale(1.1);
   background-color: #ff5733;
+}
+
+@media screen and (max-width: 650px) {
+  button {
+    padding: 8px 16px; /* Slightly smaller padding for smaller screens */
+    font-size: 14px; /* Smaller font size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 450px) {
+  button {
+    padding: 6px 12px; /* Even smaller padding for very small screens */
+    font-size: 12px; /* Even smaller font size for very small screens */
+  }
 }

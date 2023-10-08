@@ -2,7 +2,7 @@
 import React, { useState, useRef } from "react";
 import "./audiorecorder.css";
 
-function AudioRecorder() {
+function AudioRecorder({ isLoading, handleSave }) {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState("");
   const mediaRecorderRef = useRef(null);
@@ -31,24 +31,35 @@ function AudioRecorder() {
   };
 
   return (
-    <div>
-      {audioURL && <audio controls src={audioURL}></audio>}
-
-      {audioURL ? (
-        <button
-          onClick={() => {
-            setAudioURL("");
-            audioChunksRef.current = [];
-          }}
-        >
-          Try Again
-        </button>
-      ) : recording ? (
-        <button className="recording" onClick={stopRecording}>
-          Stop Recording
-        </button>
-      ) : (
-        <button onClick={startRecording}>Start Recording</button>
+    <div className="audio-recorder-container">
+      <div className="audio-controls">
+        {audioURL ? (
+          <>
+            <button
+              style={{ marginLeft: "100px", marginBottom: "20px" }}
+              onClick={() => {
+                setAudioURL("");
+                audioChunksRef.current = [];
+              }}
+            >
+              Try Again
+            </button>
+            <button onClick={handleSave}>
+              {isLoading ? "Saving..." : "Save"}
+            </button>
+          </>
+        ) : recording ? (
+          <button className="recording" onClick={stopRecording}>
+            Stop Recording
+          </button>
+        ) : (
+          <button onClick={startRecording}>Start Recording</button>
+        )}
+      </div>
+      {audioURL && (
+        <div className="audio-playback">
+          <audio controls src={audioURL}></audio>
+        </div>
       )}
     </div>
   );

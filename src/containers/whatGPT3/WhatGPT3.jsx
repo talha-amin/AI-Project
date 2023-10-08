@@ -2,12 +2,21 @@ import Feature from "../../components/feature/Feature";
 import "./whatgpt3.css";
 import { useLocation } from "react-router-dom"; // Import useLocation
 import { AudioRecorder, FileUpload } from "../../components";
+import { useState } from "react";
 
 const WhatGPT3 = ({ selectedCard }) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
   const isLanding = location.pathname === "/";
+  const [isLoading, setIsLoading] = useState(false);
 
+  const handleSave = async () => {
+    setIsLoading(true);
+    // Your save logic here
+    // Depending on whether it's audio or file, you might have different logic
+    // await saveData();
+    setIsLoading(false);
+  };
   let cardText = "";
   switch (selectedCard) {
     case 1:
@@ -61,37 +70,33 @@ const WhatGPT3 = ({ selectedCard }) => {
           </div>
         </div>
       )}
+      return (
       {isTalentDashboard && (
         <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
           <div className="gpt3__whatgpt3-heading">
             {cardText === "Vocalize" && (
               <>
-                <div style={{ animation: "fadeIn 1s forwards" }}>
-                  <h1 className="gradient__text">{cardText} </h1>
-                  <AudioRecorder />
-                  <FileUpload />
-                </div>
+                <h1 className="gradient__text">{cardText}</h1>
+                <AudioRecorder isLoading={isLoading} handleSave={handleSave} />
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
               </>
             )}
             {cardText === "Scriptize" && (
               <>
-                <div style={{ animation: "fadeIn 1s forwards" }}>
-                  <h1 className="gradient__text">{cardText} </h1>
-                  <FileUpload />
-                </div>
+                <h1 className="gradient__text">{cardText}</h1>
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
               </>
             )}
             {cardText === "Visionize" && (
               <>
-                <div style={{ animation: "fadeIn 1s forwards" }}>
-                  <h1 className="gradient__text">{cardText} </h1>
-                  <FileUpload />
-                </div>
+                <h1 className="gradient__text">{cardText}</h1>
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
               </>
             )}
           </div>
         </div>
       )}
+      );
     </>
   );
 };

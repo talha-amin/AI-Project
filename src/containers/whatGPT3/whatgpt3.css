@@ -66,11 +66,20 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: nowrap; /* Prevents wrapping onto the next line */
+
   align-items: center;
 
   margin: 4rem 0 2rem;
 }
-
+.gpt3__whatgpt3-heading > * {
+  margin-right: 20px; /* Adds some spacing between the elements */
+}
+.gpt3__whatgpt3-heading .AudioRecorder,
+.gpt3__whatgpt3-heading .FileUpload {
+  margin: 0;
+  padding: 0;
+}
 .gpt3__whatgpt3-heading h1 {
   font-size: 34px;
   line-height: 45px;
@@ -167,4 +176,48 @@
 
 .fade-in {
   animation: fadeIn 1s ease-in-out forwards;
+}
+
+@media screen and (max-width: 850px) {
+  .gpt3__whatgpt3-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .gpt3__whatgpt3-heading > * {
+    margin-right: 0; /* Reset the margin for stacked elements */
+    margin-bottom: 20px; /* Add some space between stacked elements */
+  }
+
+  .gpt3__whatgpt3-heading p {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .gpt3__whatgpt3-feature .gpt3__features-container__feature {
+    flex-direction: column;
+  }
+
+  .gpt3__whatgpt3-feature .gpt3__features-container_feature-text {
+    margin-top: 0.5rem;
+  }
+
+  .gpt3__whatgpt3-heading h1 {
+    font-size: 28px;
+    line-height: 40px;
+  }
+
+  .gpt3__whatgpt3-container {
+    justify-content: center; /* Center the features on smaller screens */
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .gpt3__whatgpt3-container .gpt3__features-container__feature {
+    margin: 1rem 0;
+    min-width: 100%;
+    max-width: 100%; /* Ensure the features take up the full width */
+  }
 }

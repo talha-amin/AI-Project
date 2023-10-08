@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./DragDropContainer.css";
 
-function FileUpload() {
+function FileUpload({ isLoading, handleSave }) {
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
+  const fileInputRef = useRef(null);
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -30,22 +31,48 @@ function FileUpload() {
     setFiles((prevFiles) => [...prevFiles, ...droppedFiles]);
   };
 
+  const handleFileSelect = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+  };
+
+  const removeFile = (indexToRemove) => {
+    setFiles((prevFiles) =>
+      prevFiles.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
   return (
-    <div
-      className={`dropzone ${dragging ? "dragging" : ""}`}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      {files.length === 0 ? (
-        "Drag & drop files here or click to select"
-      ) : (
-        <ul>
-          {files.map((file, index) => (
-            <li key={index}>{file.name}</li>
-          ))}
-        </ul>
+    <div className="file-upload-container">
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileSelect}
+      />
+      <div
+        className={`dropzone ${dragging ? "dragging" : ""}`}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current.click()}
+      >
+        {files.length === 0 ? (
+          "Drag & drop files here or click to select"
+        ) : (
+          <ul>
+            {files.map((file, index) => (
+              <li key={index}>
+                {file.name}
+                <button onClick={() => removeFile(index)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {files.length > 0 && (
+        <button onClick={handleSave}>{isLoading ? "Saving..." : "Save"}</button>
       )}
     </div>
   );

@@ -4,17 +4,33 @@ import App from "./App";
 import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, base, zora } from "wagmi/chains";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  base,
+  zora,
+  polygonMumbai,
+} from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { AuthProvider } from "./components";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, base, zora],
-  [publicProvider()]
+  [mainnet, polygon, optimism, arbitrum, base, zora, polygonMumbai],
+  [publicProvider()],
+  [
+    jsonRpcProvider({
+      rpc: (polygonMumbai) => ({
+        http: `https://${polygonMumbai}.rpc-mumbai.maticvigil.com`,
+      }),
+    }),
+  ]
 );
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: "8a62fc35bcc6432879fab9ed2bb2f35f",
   chains,
 });
 const wagmiConfig = createConfig({
