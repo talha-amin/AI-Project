@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./DragDropContainer.css";
 
-function FileUpload({ isLoading, handleSave }) {
+function FileUpload({ isLoading, handleSave, onFileUpload }) {
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
   const fileInputRef = useRef(null);
@@ -34,6 +34,7 @@ function FileUpload({ isLoading, handleSave }) {
   const handleFileSelect = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+    if (onFileUpload) onFileUpload(e);
   };
 
   const removeFile = (indexToRemove) => {
@@ -65,14 +66,18 @@ function FileUpload({ isLoading, handleSave }) {
             {files.map((file, index) => (
               <li key={index}>
                 {file.name}
-                <button onClick={() => removeFile(index)}>Remove</button>
+                <button className="remove-bt" onClick={() => removeFile(index)}>
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
         )}
       </div>
       {files.length > 0 && (
-        <button onClick={handleSave}>{isLoading ? "Saving..." : "Save"}</button>
+        <button className="save-bt" onClick={() => handleSave(files)}>
+          {isLoading ? "Saving..." : "Save"}
+        </button>
       )}
     </div>
   );
