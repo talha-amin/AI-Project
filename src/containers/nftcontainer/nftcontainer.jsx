@@ -9,25 +9,20 @@ import {
   useContractRead,
 } from "wagmi";
 
-function NFTContainer({ dataSaved }) {
+function NFTContainer() {
   const [claimed, setClaimed] = useState(false);
   const [tokenId, setTokenId] = useState(null);
   const [tokenURI, setTokenURI] = useState(null);
   const { isConnected, address } = useAccount();
 
-  const uris = [
-    "https://bafybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/",
-    "https://bafybeifcfyluyenbxmlx3odowpfw7vhxtlki3wlko6rjrnq5diovgilaiu.ipfs.nftstorage.link/",
-    "https://bafybeigq7pk2ocibcdhvw7ogglqwwna6ftrswisikadyso2pxozna372xy.ipfs.nftstorage.link/",
-  ];
-
-  const randomURI = uris[Math.floor(Math.random() * uris.length)];
-
   const { config } = usePrepareContractWrite({
     address: contractAddress,
     abi: contractABI,
     functionName: "airdropMint",
-    args: [address.toString(), randomURI],
+    args: [
+      address.toString(),
+      "https://bafybeic7mygpdsepag5jeou4zv3kp43hz4g2wx5tayvxlrz75bvok4awbm.ipfs.nftstorage.link",
+    ],
   });
 
   const {
@@ -84,7 +79,6 @@ function NFTContainer({ dataSaved }) {
           <img className="nft-image" src={tokenURI} alt="Your NFT" />
         </div>
       ) : (
-        dataSaved &&
         !claimed && (
           <div className="nft-claim-section">
             <h2 className="gradient__text nft-title">Claim Your iSai NFT</h2>

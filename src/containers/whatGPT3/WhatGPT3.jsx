@@ -3,39 +3,20 @@ import "./whatgpt3.css";
 import { useLocation } from "react-router-dom"; // Import useLocation
 import { AudioRecorder, FileUpload } from "../../components";
 import { useState } from "react";
-import { auth, db } from "../../components/google/firebase";
-import { doc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytes, getStorage } from "firebase/storage";
 
-const WhatGPT3 = ({ selectedCard, setDataSaved }) => {
+const WhatGPT3 = ({ selectedCard }) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
   const isLanding = location.pathname === "/";
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState(null);
 
-  const user = auth.currentUser;
-
-  const handleSave = async (uploadedFile) => {
-    if (!uploadedFile || uploadedFile.length === 0) return;
-
+  const handleSave = async () => {
     setIsLoading(true);
-
-    const file = uploadedFile[0];
-
-    const storage = getStorage();
-    const storageRef = ref(storage, `userFiles/${user.uid}/${file.name}`);
-    await uploadBytes(storageRef, file);
-
-    // Update user's document with the file reference
-    const userDoc = doc(db, "users", user.uid);
-    await updateDoc(userDoc, {
-      uploadedFile: `userFiles/${user.uid}/${file.name}`,
-    });
-    setDataSaved(true);
+    // Your save logic here
+    // Depending on whether it's audio or file, you might have different logic
+    // await saveData();
     setIsLoading(false);
   };
-
   let cardText = "";
   switch (selectedCard) {
     case 1:
@@ -53,17 +34,14 @@ const WhatGPT3 = ({ selectedCard, setDataSaved }) => {
 
   const handleAudioUpload = (event) => {
     const file = event.target.files[0];
-    setUploadedFile(file);
   };
 
   const handleTextUpload = (event) => {
     const file = event.target.files[0];
-    setUploadedFile(file);
   };
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    setUploadedFile(file);
   };
 
   if (isTalentDashboard && !cardText) return null;
@@ -92,34 +70,33 @@ const WhatGPT3 = ({ selectedCard, setDataSaved }) => {
           </div>
         </div>
       )}
-
+      return (
       {isTalentDashboard && (
         <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
           <div className="gpt3__whatgpt3-heading">
-            <h1 className="gradient__text">{cardText}</h1>
-
             {cardText === "Vocalize" && (
-              <AudioRecorder
-                isLoading={isLoading}
-                handleSave={handleSave}
-                onFileUpload={handleAudioUpload}
-              />
+              <>
+                <h1 className="gradient__text">{cardText}</h1>
+                <AudioRecorder isLoading={isLoading} handleSave={handleSave} />
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+              </>
             )}
-
-            <FileUpload
-              isLoading={isLoading}
-              handleSave={handleSave}
-              onFileUpload={
-                cardText === "Vocalize"
-                  ? handleAudioUpload
-                  : cardText === "Scriptize"
-                  ? handleTextUpload
-                  : handleImageUpload
-              }
-            />
+            {cardText === "Scriptize" && (
+              <>
+                <h1 className="gradient__text">{cardText}</h1>
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+              </>
+            )}
+            {cardText === "Visionize" && (
+              <>
+                <h1 className="gradient__text">{cardText}</h1>
+                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+              </>
+            )}
           </div>
         </div>
       )}
+      );
     </>
   );
 };

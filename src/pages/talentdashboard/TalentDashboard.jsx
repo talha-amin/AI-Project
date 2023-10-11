@@ -5,7 +5,6 @@ import { useAccount } from "wagmi";
 
 const TalentDashboard = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const [dataSaved, setDataSaved] = useState(false);
   const { isConnected, address } = useAccount();
 
   return (
@@ -18,8 +17,8 @@ const TalentDashboard = () => {
               selectedCard={selectedCard}
               setSelectedCard={setSelectedCard}
             />
-            <WhatGPT3 selectedCard={selectedCard} setDataSaved={setDataSaved} />
-            <NFTContainer dataSaved={dataSaved} />
+            <WhatGPT3 selectedCard={selectedCard} />
+            <NFTContainer />
           </>
         )}
       </div>

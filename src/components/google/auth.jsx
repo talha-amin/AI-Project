@@ -1,33 +1,14 @@
 import { auth, db } from "./firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  query,
-  where,
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useAccount } from "wagmi";
 
 function Login() {
   const address = useAccount();
-
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
 
     try {
-      // Check if wallet address is already associated with another user
-      const usersRef = collection(db, "users");
-      const q = query(usersRef, where("walletAddress", "==", address.address));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        console.error("Wallet address already associated with another user.");
-        return; // Exit the function
-      }
-
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
