@@ -3,6 +3,11 @@ import "./whatgpt3.css";
 import { useLocation } from "react-router-dom"; // Import useLocation
 import { AudioRecorder, FileUpload } from "../../components";
 import { useState } from "react";
+import { getDownloadURL } from "firebase/storage"; // Import this
+import { auth, db, storage } from "../../components/google/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { uploadBytes } from "firebase/storage"; // This import is necessary
+import { ref } from "firebase/storage"; // This import is crucial for the modular SDK
 
 const WhatGPT3 = ({ selectedCard }) => {
   const location = useLocation();
@@ -10,13 +15,41 @@ const WhatGPT3 = ({ selectedCard }) => {
   const isLanding = location.pathname === "/";
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSave = async () => {
+  const handleSave = async (uploadedItems, cardText) => {
+    console.log("cardText:", cardText);
     setIsLoading(true);
-    // Your save logic here
-    // Depending on whether it's audio or file, you might have different logic
-    // await saveData();
+    const uploadedFiles = Array.isArray(uploadedItems)
+      ? uploadedItems
+      : [uploadedItems];
+
+    const userId = auth.currentUser.uid; // Get the current user's ID
+    const storageRef = ref(storage);
+    for (let file of uploadedFiles) {
+      // Create a storage reference
+      const fileRef = ref(storage, `${userId}/${cardText}/${file.name}`);
+
+      try {
+        // Upload the file
+        await uploadBytes(fileRef, file);
+
+        // Optional: If you want to get the download URL after upload
+        const fileURL = await getDownloadURL(fileRef); // Updated line
+        console.log("Uploaded file available at: ", fileURL);
+
+        const userRef = doc(db, "users", userId);
+        await updateDoc(userRef, {
+          [`types.${cardText}`]: true, // This sets the nested field "types.cardText" to true
+        });
+
+        // If you want to store this URL or any related file data to Firestore, do it here.
+      } catch (error) {
+        console.error("Error uploading file: ", error);
+      }
+    }
+
     setIsLoading(false);
   };
+
   let cardText = "";
   switch (selectedCard) {
     case 1:
@@ -31,18 +64,6 @@ const WhatGPT3 = ({ selectedCard }) => {
     default:
       cardText = ""; // default or any placeholder text
   }
-
-  const handleAudioUpload = (event) => {
-    const file = event.target.files[0];
-  };
-
-  const handleTextUpload = (event) => {
-    const file = event.target.files[0];
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-  };
 
   if (isTalentDashboard && !cardText) return null;
 
@@ -77,20 +98,36 @@ const WhatGPT3 = ({ selectedCard }) => {
             {cardText === "Vocalize" && (
               <>
                 <h1 className="gradient__text">{cardText}</h1>
-                <AudioRecorder isLoading={isLoading} handleSave={handleSave} />
-                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+                <AudioRecorder
+                  isLoading={isLoading}
+                  handleSave={handleSave}
+                  cardText={cardText}
+                />
+                <FileUpload
+                  isLoading={isLoading}
+                  handleSave={handleSave}
+                  cardText={cardText}
+                />
               </>
             )}
             {cardText === "Scriptize" && (
               <>
                 <h1 className="gradient__text">{cardText}</h1>
-                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+                <FileUpload
+                  isLoading={isLoading}
+                  handleSave={handleSave}
+                  cardText={cardText}
+                />
               </>
             )}
             {cardText === "Visionize" && (
               <>
                 <h1 className="gradient__text">{cardText}</h1>
-                <FileUpload isLoading={isLoading} handleSave={handleSave} />
+                <FileUpload
+                  isLoading={isLoading}
+                  handleSave={handleSave}
+                  cardText={cardText}
+                />
               </>
             )}
           </div>

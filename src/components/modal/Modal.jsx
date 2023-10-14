@@ -41,9 +41,6 @@ const Modal = () => {
             {!currentUser && (
               <>
                 <div className="connect-wallet ">
-                  <div className="info-icon">
-                    <span onClick={handleInfoClick}>?</span>
-                  </div>
                   <ConnectButton />
                 </div>
                 <div className="login ">{address.address && <Login />}</div>

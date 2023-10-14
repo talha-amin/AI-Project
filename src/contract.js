@@ -1,4 +1,4 @@
-export const contractAddress = "0x9e258f765ad031d30e58967ce91526f94ff4b54b";
+export const contractAddress = "0xd15eB2f48C95Fb847554c2A0aDe89291052d956A";
 export const contractABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -82,16 +82,6 @@ export const contractABI = [
   },
   {
     inputs: [
-      { internalType: "address", name: "_address", type: "address" },
-      { internalType: "string", name: "_tokenURI", type: "string" },
-    ],
-    name: "airdropMint",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
       { internalType: "address", name: "to", type: "address" },
       { internalType: "uint256", name: "tokenId", type: "uint256" },
     ],
@@ -117,7 +107,7 @@ export const contractABI = [
   {
     inputs: [{ internalType: "address", name: "", type: "address" }],
     name: "hasMinted",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
@@ -129,6 +119,13 @@ export const contractABI = [
     name: "isApprovedForAll",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "string", name: "_tokenURI", type: "string" }],
+    name: "mintNFT",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -155,13 +152,6 @@ export const contractABI = [
   {
     inputs: [],
     name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "string", name: "_tokenURI", type: "string" }],
-    name: "safeMint",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./DragDropContainer.css";
 
-function FileUpload({ isLoading, handleSave }) {
+function FileUpload({ isLoading, handleSave, cardText }) {
   const [dragging, setDragging] = useState(false);
   const [files, setFiles] = useState([]);
   const fileInputRef = useRef(null);
@@ -72,7 +72,9 @@ function FileUpload({ isLoading, handleSave }) {
         )}
       </div>
       {files.length > 0 && (
-        <button onClick={handleSave}>{isLoading ? "Saving..." : "Save"}</button>
+        <button onClick={() => handleSave(files, cardText)}>
+          {isLoading ? "Saving..." : "Save"}
+        </button>
       )}
     </div>
   );

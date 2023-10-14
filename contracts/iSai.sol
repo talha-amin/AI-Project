@@ -14,7 +14,7 @@ contract iSai is ERC721Enumerable, Ownable {
     constructor() ERC721("iSai", "iSai") {}
 
     mapping(uint => string) _tokenURIs;
-    mapping(address => bool) public hasMinted;
+    mapping(address => uint) public hasMinted;
 
     function _baseURI() internal view override returns (string memory) {
         return URI;
@@ -35,20 +35,12 @@ contract iSai is ERC721Enumerable, Ownable {
         _tokenURIs[_tokenId] = _tokenURI;
     }
 
-    function safeMint(string memory _tokenURI) public {
+    function mintNFT(string memory _tokenURI) external {
+        require(hasMinted[msg.sender] < 3, "You have already minted 3 nfts");
+        hasMinted[msg.sender] += 1;
         uint256 _tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, _tokenId);
-        _setTokenURI(_tokenId, _tokenURI);
-    }
-
-    // Single airdrop function
-    function airdropMint(address _address, string memory _tokenURI) external {
-        require(!hasMinted[msg.sender], "You have already minted");
-        hasMinted[msg.sender] = true;
-        uint256 _tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(_address, _tokenId);
         _setTokenURI(_tokenId, _tokenURI);
     }
 

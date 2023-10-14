@@ -221,3 +221,18 @@
     max-width: 100%; /* Ensure the features take up the full width */
   }
 }
+.upload-progress {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #4caf50; /* green color for the progress */
+}

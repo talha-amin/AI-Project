@@ -65,143 +65,45 @@ a {
   margin: 4rem 6rem;
 }
 
-.scale-up-center {
-  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
-    both;
-  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+.nft-claim-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-@-webkit-keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
+.nft-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 20%; /* Or any desired width */
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
 }
 
-@keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
+.nft-card-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .claim-button {
-  padding: 10px 20px; /* Adjust as needed */
-  background-color: #3498db; /* Color of your choice */
-  color: #ffffff; /* Text color */
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #2196f3;
+  color: white;
   border: none;
-  border-radius: 5px; /* Rounded corners */
   cursor: pointer;
-  font-size: 16px; /* Adjust as needed */
-  outline: none; /* Removes the default focus outline */
-  animation: pointing 1s infinite; /* Applying the animation */
+  transition: background-color 0.3s ease;
 }
 
-.nft-image {
-  width: 300px; /* Adjust this value to your desired width */
-  height: auto; /* Maintain the aspect ratio */
-  border: 5px solid white;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
-  transition: opacity 1s ease-in-out; /* For the fade-in effect */
-  opacity: 0; /* Initially, the image is transparent */
+.claim-button:hover {
+  background-color: #1976d2;
 }
 
-.nft-image[src]:not([src=""]) {
-  opacity: 1;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .section__padding {
-    padding: 4rem;
-  }
-
-  .section__margin {
-    margin: 4rem;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .section__padding {
-    padding: 4rem 2rem;
-  }
-
-  .section__margin {
-    margin: 4rem 2rem;
-  }
-}
-
-@keyframes pointing {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.nft-display,
-.nft-claim-section {
-  margin-left: 500px;
-}
-
-.nft-title {
-  margin-top: 20px;
-}
-
-.nft-claim-section .claim-button {
-  margin-top: 20px;
-  padding: 10px 90px;
-}
-
-/* Mobile responsiveness */
-@media screen and (max-width: 900px) {
-  .nft-display,
-  .nft-claim-section {
-    margin-left: 100px;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .nft-display,
-  .nft-claim-section {
-    margin-left: 50px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .nft-display,
-  .nft-claim-section {
-    margin-left: 20px;
-  }
-
-  .nft-claim-section .claim-button {
-    padding: 10px 50px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .nft-display,
-  .nft-claim-section {
-    margin-left: 10px;
-  }
+.claim-button:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
 }

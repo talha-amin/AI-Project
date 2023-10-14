@@ -1,93 +1,149 @@
 import React, { useState, useEffect } from "react";
-import NFT from "../../assets/NFT.png";
 import "./nftcontainer.css";
+import { runTransaction } from "firebase/firestore";
 import { contractAddress, contractABI } from "../../contract";
-import {
-  useAccount,
-  usePrepareContractWrite,
-  useContractWrite,
-  useContractRead,
-} from "wagmi";
+import { usePrepareContractWrite, useContractWrite } from "wagmi";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db, auth, storage } from "../../components/google/firebase";
+import { ref, list } from "firebase/storage"; // This import is crucial for the modular SDK
 
 function NFTContainer() {
-  const [claimed, setClaimed] = useState(false);
-  const [tokenId, setTokenId] = useState(null);
-  const [tokenURI, setTokenURI] = useState(null);
-  const { isConnected, address } = useAccount();
+  const URIs = {
+    Vocalize:
+      "https://bafybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/",
+    Scriptize:
+      "https://bafybeigq7pk2ocibcdhvw7ogglqwwna6ftrswisikadyso2pxozna372xy.ipfs.nftstorage.link/",
+    Visualize:
+      "https://bafybeifcfyluyenbxmlx3odowpfw7vhxtlki3wlko6rjrnq5diovgilaiu.ipfs.nftstorage.link/",
+  };
 
-  const { config } = usePrepareContractWrite({
+  const [claimedNFTs, setClaimedNFTs] = useState([]);
+  const [minting, setMinting] = useState(false);
+  const [contractConfig, setContractConfig] = useState(null);
+  const [typeAvailability, setTypeAvailability] = useState({});
+
+  const { config: preparedConfig } = usePrepareContractWrite({
     address: contractAddress,
     abi: contractABI,
-    functionName: "airdropMint",
-    args: [
-      address.toString(),
-      "https://bafybeic7mygpdsepag5jeou4zv3kp43hz4g2wx5tayvxlrz75bvok4awbm.ipfs.nftstorage.link",
-    ],
+    functionName: "mintNFT",
+    args: contractConfig ? [contractConfig.uri] : [],
   });
 
   const {
     data: mintData,
     isLoading: mintLoading,
     isSuccess: mintSuccess,
-    write: airdropMint,
-  } = useContractWrite(config);
-
-  const { data: balanceData } = useContractRead({
-    address: contractAddress,
-    abi: contractABI,
-    functionName: "balanceOf",
-    args: [address.toString()],
-  });
-
-  const { data: tokenIdData } = useContractRead({
-    address: contractAddress,
-    abi: contractABI,
-    functionName: "tokenOfOwnerByIndex",
-    args: [address.toString(), 0],
-  });
-
-  const { data: tokenURIData } = useContractRead({
-    address: contractAddress,
-    abi: contractABI,
-    functionName: "tokenURI",
-    args: [tokenId],
-  });
+    write: mintNFT,
+  } = useContractWrite(preparedConfig);
 
   useEffect(() => {
-    if (balanceData && balanceData > 0 && tokenIdData) {
-      setTokenId(tokenIdData);
+    if (auth.currentUser) {
+      const fetchClaimedNFTs = async () => {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          setClaimedNFTs(userSnap.data().claimedNFTs || []);
+        }
+      };
+
+      fetchClaimedNFTs();
     }
-  }, [balanceData, tokenIdData]);
+  }, [auth.currentUser]);
 
   useEffect(() => {
-    if (tokenId && tokenURIData) {
-      setTokenURI(tokenURIData);
+    async function checkTypes() {
+      let availability = {};
+      for (let typeKey of Object.keys(URIs)) {
+        availability[typeKey] = await isTypeInStorage(typeKey);
+      }
+      setTypeAvailability(availability);
     }
-  }, [tokenId, tokenURIData]);
-  const handleClaim = async () => {
-    if (isConnected) {
-      await airdropMint();
-      setClaimed(true);
+
+    checkTypes();
+  }, []);
+
+  async function isTypeInStorage(type) {
+    const userId = auth.currentUser.uid;
+    const userRef = doc(db, "users", userId);
+    const userDoc = await getDoc(userRef);
+
+    try {
+      return (
+        userDoc.exists() &&
+        userDoc.data().types &&
+        userDoc.data().types[type] === true
+      );
+    } catch (error) {
+      console.error("Error checking type in storage: ", error);
+      return false;
     }
-  };
+  }
+
+  async function handleAirdrop(type) {
+    if (!typeAvailability[type]) {
+      alert("Please register data first before claiming this NFT.");
+      return;
+    }
+
+    if (claimedNFTs.includes(type)) {
+      return;
+    }
+
+    try {
+      setMinting(true);
+      setContractConfig({ uri: URIs[type] });
+      await mintNFT?.();
+
+      const userRef = doc(db, "users", auth.currentUser.uid);
+
+      await runTransaction(db, async (transaction) => {
+        const userDoc = await transaction.get(userRef);
+        if (!userDoc.exists()) {
+          throw new Error("User does not exist!");
+        }
+
+        const currentClaimedNFTs = userDoc.data().claimedNFTs || [];
+        if (!currentClaimedNFTs.includes(type)) {
+          transaction.update(userRef, {
+            claimedNFTs: [...currentClaimedNFTs, type],
+          });
+        }
+      });
+
+      setMinting(false);
+      console.log(`${type} Minted`, mintSuccess);
+    } catch (error) {
+      console.error(`${type} Failed`, error);
+      setMinting(false);
+    }
+  }
+  console.log({ claimedNFTs, minting, typeAvailability });
 
   return (
     <div className="gradient_bg section__padding">
-      {tokenURI ? (
-        <div className="nft-display">
-          <h2 className="gradient__text nft-title">iSai NFT:</h2>
-          <img className="nft-image" src={tokenURI} alt="Your NFT" />
-        </div>
-      ) : (
-        !claimed && (
-          <div className="nft-claim-section">
-            <h2 className="gradient__text nft-title">Claim Your iSai NFT</h2>
-            <button onClick={handleClaim} className="claim-button">
-              Claim
+      <h2 className="gradient__text nft-title">Claim Your iSai NFT</h2>
+      <div className="nft-claim-section">
+        {Object.keys(URIs).map((type) => (
+          <div key={type} className="nft-card">
+            <img
+              src={URIs[type]}
+              alt={`${type} NFT`}
+              className="nft-card-image"
+            />
+            <button
+              onClick={() => handleAirdrop(type)}
+              className={`claim-button ${
+                claimedNFTs.includes(type) ? "claimed" : ""
+              }`}
+              disabled={
+                claimedNFTs.includes(type) || minting || !typeAvailability[type]
+              }
+            >
+              {claimedNFTs.includes(type) ? "Claimed" : `Claim ${type}`}
             </button>
           </div>
-        )
-      )}
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,10 +2,11 @@
 import React, { useState, useRef } from "react";
 import "./audiorecorder.css";
 
-function AudioRecorder({ isLoading, handleSave }) {
+function AudioRecorder({ isLoading, handleSave, cardText }) {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState("");
   const mediaRecorderRef = useRef(null);
+  const [audioBlob, setAudioBlob] = useState(null);
   const audioChunksRef = useRef([]);
 
   const startRecording = async () => {
@@ -18,11 +19,18 @@ function AudioRecorder({ isLoading, handleSave }) {
       const audioBlob = new Blob(audioChunksRef.current, { type: "audio/wav" });
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
+      setAudioBlob(audioBlob); // Save the audioBlob in state
+      audioBlob.name = `audio_recording_${Date.now()}.wav`;
+
+      audioChunksRef.current = []; // Clear the chunks
     };
     mediaRecorderRef.current.start();
     setRecording(true);
   };
-
+  const audioData = {
+    data: audioBlob,
+    name: `audio_recording_${Date.now()}.wav`,
+  };
   const stopRecording = () => {
     if (mediaRecorderRef.current) {
       mediaRecorderRef.current.stop();
@@ -44,7 +52,13 @@ function AudioRecorder({ isLoading, handleSave }) {
             >
               Try Again
             </button>
-            <button onClick={handleSave}>
+            <button
+              onClick={() => {
+                console.log("Saving blob: ", audioBlob);
+                console.log("cardText:", cardText);
+                handleSave([audioData], cardText);
+              }}
+            >
               {isLoading ? "Saving..." : "Save"}
             </button>
           </>
