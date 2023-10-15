@@ -10,7 +10,7 @@ async function main() {
 
   await isai.waitForDeployment();
 
-  console.log("iSai contract deployed to:", isai.address);
+  console.log("iSai contract deployed to:", isai.target);
 }
 
 main()
