@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAuth } from "../google/authcontext";
 import { Login, Logout } from "../index";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
+import { doc, getDoc } from "firebase/firestore";
+import { db, auth } from "../../components/google/firebase";
+
 const Modal = () => {
   const address = useAccount();
   const [showModal, setShowModal] = useState(false);
@@ -17,14 +20,25 @@ const Modal = () => {
     navigate("/talent-dashboard");
   };
 
-  const handleUserClick = () => {
-    setShowModal(false);
-    navigate("/user-dashboard");
+  const handleUserClick = async () => {
+    if (auth.currentUser) {
+      const userRef = doc(db, "users", auth.currentUser.uid);
+
+      try {
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists() || !userSnap.data().types) {
+          setShowModal(false);
+          navigate("/user-dashboard");
+        } else {
+          console.error("Change your wallet address and email");
+        }
+      } catch (error) {
+        console.error("Error checking user data:", error);
+      }
+    }
   };
 
-  const handleInfoClick = () => {
-    alert("This button allows you to connect to web3.");
-  };
   return (
     <div>
       <button

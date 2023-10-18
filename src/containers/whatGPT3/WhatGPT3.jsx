@@ -8,10 +8,17 @@ import { auth, db, storage } from "../../components/google/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { uploadBytes } from "firebase/storage"; // This import is necessary
 import { ref } from "firebase/storage"; // This import is crucial for the modular SDK
+import { addVoice } from "../../api/createVoice";
 
-const WhatGPT3 = ({ selectedCard }) => {
+const WhatGPT3 = ({
+  selectedCard,
+  voiceLab,
+  voiceSelector,
+  handleVoiceSelection,
+}) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
+  const isUserDashboard = location.pathname === "/user-dashboard";
   const isLanding = location.pathname === "/";
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,31 +29,26 @@ const WhatGPT3 = ({ selectedCard }) => {
       ? uploadedItems
       : [uploadedItems];
 
-    const userId = auth.currentUser.uid; // Get the current user's ID
+    const userId = auth.currentUser.uid;
     const storageRef = ref(storage);
     for (let file of uploadedFiles) {
-      // Create a storage reference
       const fileRef = ref(storage, `${userId}/${cardText}/${file.name}`);
 
       try {
-        // Upload the file
         await uploadBytes(fileRef, file);
 
-        // Optional: If you want to get the download URL after upload
-        const fileURL = await getDownloadURL(fileRef); // Updated line
+        const fileURL = await getDownloadURL(fileRef);
         console.log("Uploaded file available at: ", fileURL);
 
         const userRef = doc(db, "users", userId);
         await updateDoc(userRef, {
-          [`types.${cardText}`]: true, // This sets the nested field "types.cardText" to true
+          [`types.${cardText}`]: true,
         });
-
-        // If you want to store this URL or any related file data to Firestore, do it here.
       } catch (error) {
         console.error("Error uploading file: ", error);
       }
     }
-
+    addVoice({ cardText: cardText });
     setIsLoading(false);
   };
 
@@ -62,7 +64,7 @@ const WhatGPT3 = ({ selectedCard }) => {
       cardText = "Visionize";
       break;
     default:
-      cardText = ""; // default or any placeholder text
+      cardText = "";
   }
 
   if (isTalentDashboard && !cardText) return null;
@@ -91,7 +93,6 @@ const WhatGPT3 = ({ selectedCard }) => {
           </div>
         </div>
       )}
-      return (
       {isTalentDashboard && (
         <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
           <div className="gpt3__whatgpt3-heading">
@@ -133,7 +134,23 @@ const WhatGPT3 = ({ selectedCard }) => {
           </div>
         </div>
       )}
-      );
+      {voiceLab && isUserDashboard && (
+        <>
+          <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
+            <div className="gpt3__whatgpt3-heading">
+              <h1 className="gradient__text">Voice Lab</h1>
+            </div>
+            <div className={`box`} onClick={handleVoiceSelection}>
+              <i
+                className={`fa ${
+                  voiceSelector ? "fa-check-circle" : "fa-plus-circle"
+                }`}
+              ></i>
+              <p>Select voice from our talents</p>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

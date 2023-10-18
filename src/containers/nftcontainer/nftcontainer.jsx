@@ -5,7 +5,6 @@ import { contractAddress, contractABI } from "../../contract";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth, storage } from "../../components/google/firebase";
-import { ref, list } from "firebase/storage"; // This import is crucial for the modular SDK
 
 function NFTContainer() {
   const URIs = {

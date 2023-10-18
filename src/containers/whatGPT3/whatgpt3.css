@@ -236,3 +236,30 @@
   height: 100%;
   background-color: #4caf50; /* green color for the progress */
 }
+.box {
+  width: 400px;
+  height: 80px;
+  margin-left: 400px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.box:hover {
+  background-color: #007bff;
+}
+
+.fa {
+  color: #e0e0e0;
+  font-size: 24px;
+}
+
+.box p {
+  font-size: 20px;
+  color: #fff1f1; /* Text color */
+}

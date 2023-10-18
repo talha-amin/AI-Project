@@ -207,7 +207,7 @@
   color: #fff; /* White text color */
   border: none;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 28px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
@@ -255,4 +255,21 @@
   .gpt3__card {
     max-width: 90%; /* Allow the card to take up more width on very small screens */
   }
+}
+/* styles.css */
+.plus-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.plus-button i {
+  margin-right: 5px; /* Add spacing between the icon and text */
+}
+
+.plus-button:hover {
+  background-color: #0056b3; /* Change color on hover */
 }

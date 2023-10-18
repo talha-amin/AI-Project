@@ -1,15 +1,21 @@
+import "font-awesome/css/font-awesome.min.css";
 import people from "../../assets/people.png";
 import ai from "../../assets/ai.png";
 import "./header.css";
-import { useLocation } from "react-router-dom"; // Import useLocation
+import { useLocation } from "react-router-dom";
 
-const Header = ({ selectedCard, setSelectedCard }) => {
+const Header = ({ selectedCard, setSelectedCard, voiceLab, setVoiceLab }) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
   const isLanding = location.pathname === "/";
+  const isUserDashboard = location.pathname === "/user-dashboard";
 
   const handleCardClick = (cardNumber) => {
     setSelectedCard(cardNumber);
+  };
+
+  const toggleVoiceLab = () => {
+    setVoiceLab(!voiceLab);
   };
 
   return (
@@ -101,6 +107,24 @@ const Header = ({ selectedCard, setSelectedCard }) => {
                   Submit Your Artwork and Witness its Magical Transformation!{" "}
                 </p>
                 <button>Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {isUserDashboard && (
+        <div className="gpt3__header section__padding" id="home">
+          <div className="gpt3__header-content">
+            <h1 className="gradient__text">Speech Synthesis</h1>
+            <p>
+              Unleash the power of our cutting-edge technology to generate
+              realistic, captivating speech in a wide range of languages.
+            </p>
+            <div className="gpt3__cards-container">
+              <div className="gpt3__card" style={{ marginLeft: "530px" }}>
+                <button className="plus-button" onClick={toggleVoiceLab}>
+                  <i className="fa fa-plus"></i> Add Voice
+                </button>
               </div>
             </div>
           </div>
