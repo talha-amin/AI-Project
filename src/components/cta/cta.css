@@ -88,8 +88,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2rem;
-  margin: 2rem;
+  padding: 0rem;
+  margin: 1rem;
   border-radius: 1rem;
   background: var(--gradient-bar);
 }
@@ -126,7 +126,7 @@
 
 .gpt3__cta-content-user li {
   background-color: rgba(255, 255, 255, 0.1);
-  padding: 0rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
   cursor: pointer;
@@ -166,15 +166,32 @@
   max-width: 200px;
   border-radius: 0%;
   height: auto;
+  overflow: hidden;
 }
 
-@media screen and (max-width: 650px) {
+/* Media query for screens with a maximum width of 768px (typical for mobile devices) */
+@media (max-width: 768px) {
   .gpt3__cta-user {
-    flex-direction: column;
+    margin: 0.5rem; /* Adjust margin for smaller screens */
   }
 
   .gpt3__cta-content-user {
-    text-align: center;
-    margin: 1rem 0;
+    margin: 0.5rem; /* Adjust margin for smaller screens */
+  }
+
+  .gpt3__cta-content-user h3 {
+    font-size: 18px; /* Reduce font size for smaller screens */
+    margin-bottom: 0.75rem; /* Adjust margin for smaller screens */
+  }
+
+  .gpt3__cta-content-user li {
+    padding: 0.5rem; /* Adjust padding for smaller screens */
+    margin-bottom: 0.5rem; /* Adjust margin for smaller screens */
+  }
+
+  .gpt3__cta-content-user li img {
+    width: 30px; /* Adjust image size for smaller screens */
+    height: 30px; /* Adjust image size for smaller screens */
+    margin-right: 0.5rem; /* Adjust margin for smaller screens */
   }
 }

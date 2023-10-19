@@ -12,6 +12,7 @@ import { addVoice } from "../../api/createVoice";
 
 const WhatGPT3 = ({
   selectedCard,
+  showContent,
   voiceLab,
   voiceSelector,
   handleVoiceSelection,
@@ -65,6 +66,21 @@ const WhatGPT3 = ({
       break;
     default:
       cardText = "";
+  }
+
+  let headingText = "";
+  switch (showContent) {
+    case 1:
+      headingText = "Voice Lab : Discover voices from our talent pool ";
+      break;
+    case 2:
+      headingText = "Script Lab : Discover scripts from our talent pool ";
+      break;
+    case 3:
+      headingText = "Art Lab : Discover artwork from our talent pool ";
+      break;
+    default:
+      headingText = "";
   }
 
   if (isTalentDashboard && !cardText) return null;
@@ -138,7 +154,7 @@ const WhatGPT3 = ({
         <>
           <div className="gpt3__whatgpt3 section__margin" id="wgpt3">
             <div className="gpt3__whatgpt3-heading">
-              <h1 className="gradient__text">Voice Lab</h1>
+              <h1 className="gradient__text">{headingText}</h1>
             </div>
             <div className={`box`} onClick={handleVoiceSelection}>
               <i
@@ -146,7 +162,7 @@ const WhatGPT3 = ({
                   voiceSelector ? "fa-check-circle" : "fa-plus-circle"
                 }`}
               ></i>
-              <p>Select voice from our talents</p>
+              <p>Select from our talent pool below</p>
             </div>
           </div>
         </>

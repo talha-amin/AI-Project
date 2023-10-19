@@ -263,3 +263,19 @@
   font-size: 20px;
   color: #fff1f1; /* Text color */
 }
+@media (max-width: 768px) {
+  .box {
+    width: 100%; /* Make the box full-width */
+    max-width: 300px; /* Set a maximum width to control content width on larger screens */
+    margin: 0 auto; /* Center the box horizontally */
+    margin-bottom: 20px; /* Add some spacing between boxes */
+  }
+
+  .box p {
+    font-size: 16px; /* Reduce font size for better mobile readability */
+  }
+
+  .fa {
+    font-size: 20px; /* Adjust icon size for better mobile display */
+  }
+}

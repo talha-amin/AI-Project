@@ -27,9 +27,6 @@ const Navbar = ({ type }) => {
 
   const userLinks = [
     { href: "#home", label: "Home" },
-    { href: "#UploadText", label: "Upload Text" },
-    { href: "#SelectVoice", label: "Select Voice" },
-    { href: "#AICloning", label: "AI Cloning" },
     { href: "#GeneratePodcast", label: "Generate Podcast" },
   ];
 

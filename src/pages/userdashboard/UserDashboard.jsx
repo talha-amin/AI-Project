@@ -9,10 +9,16 @@ import { useState } from "react";
 const UserDasboard = () => {
   const { isConnected, address } = useAccount();
   const [voiceLab, setVoiceLab] = useState(false);
+  const [showContent, setShowContent] = useState(null);
   const [voiceSelector, setVoiceSelector] = useState(false);
 
   const handleVoiceSelection = () => {
     setVoiceSelector(!voiceSelector);
+  };
+
+  const handleCloseContent = () => {
+    setVoiceSelector(false);
+    setVoiceLab(false);
   };
   return (
     <div className="App">
@@ -20,11 +26,18 @@ const UserDasboard = () => {
         <Navbar type="User" />
         {isConnected && address && (
           <>
-            <Header voiceLab={voiceLab} setVoiceLab={setVoiceLab} />
+            <Header
+              voiceLab={voiceLab}
+              setVoiceLab={setVoiceLab}
+              setShowContent={setShowContent}
+              showContent={showContent}
+              onCloseContent={handleCloseContent}
+            />
             <WhatGPT3
               voiceLab={voiceLab}
               voiceSelector={voiceSelector}
               handleVoiceSelection={handleVoiceSelection}
+              showContent={showContent}
             />
             <CTA voiceSelector={voiceSelector} />
             <Blog />

@@ -4,7 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db, auth, storage } from "../../components/google/firebase";
 import { useEffect, useState } from "react";
 
-const CTA = ({ voiceSelector }) => {
+const CTA = ({ voiceSelector, showContent }) => {
   const location = useLocation();
   const isUserDashboard = location.pathname === "/user-dashboard";
   const isLanding = location.pathname === "/";
@@ -32,8 +32,6 @@ const CTA = ({ voiceSelector }) => {
       getUsersWithVocalize();
     }
   }, [voiceSelector, isUserDashboard]);
-
-  console.log("usersWithVocalize:", usersWithVocalize);
   return (
     <>
       {isLanding && (
@@ -51,7 +49,7 @@ const CTA = ({ voiceSelector }) => {
         <div className="gpt3__cta-user">
           <div className="gpt3__cta-content-user">
             <p>View Different Voices Available On Our Platform</p>
-            <h3>Select Voices From Our Community Talents</h3>
+            <h3>Select a voice from our talent pool</h3>
           </div>
 
           <div className="gpt3__cta-content-user">
