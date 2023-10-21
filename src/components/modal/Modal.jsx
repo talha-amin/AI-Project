@@ -4,20 +4,73 @@ import { useNavigate } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAuth } from "../google/authcontext";
 import { Login, Logout } from "../index";
-import { useAccount, useDisconnect } from "wagmi";
-import { doc, getDoc } from "firebase/firestore";
+import { useAccount } from "wagmi";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../components/google/firebase";
-
+import { Snackbar } from "../index";
 const Modal = () => {
   const address = useAccount();
   const [showModal, setShowModal] = useState(false);
+  const [snack, setSnack] = useState({ message: "", type: "" });
 
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  const handleTalentClick = () => {
-    setShowModal(false);
-    navigate("/talent-dashboard");
+  const handleTalentClick = async () => {
+    if (auth.currentUser) {
+      const userRef = doc(db, "users", auth.currentUser.uid);
+
+      try {
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+          const newUser = {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            walletAddress: address,
+          };
+
+          await setDoc(userRef, newUser);
+
+          setSnack({
+            message:
+              "Welcome to the Talent Dashboard! Your account has been successfully created.",
+            type: "success",
+          });
+          navigate("/talent-dashboard");
+        } else {
+          const userData = userSnap.data();
+          const firestoreWalletAddress = userData.walletAddress;
+          const firestoreEmail = userData.email;
+
+          const currentWalletAddress = (
+            typeof address === "string" ? address : address.address || ""
+          ).replace(/"/g, "");
+          const currentEmail = auth.currentUser.email;
+
+          if (
+            currentWalletAddress !== firestoreWalletAddress ||
+            currentEmail !== firestoreEmail
+          ) {
+            setSnack({
+              message: "Either wallet address or email does not match!",
+              type: "error",
+            });
+          } else {
+            navigate("/talent-dashboard");
+            setSnack({
+              message: "Navigation to talent dashboard successful!",
+              type: "success",
+            });
+          }
+        }
+      } catch (error) {
+        setSnack({
+          message: `Error checking user data: ${error.message}`,
+          type: "error",
+        });
+      }
+    }
   };
 
   const handleUserClick = async () => {
@@ -27,14 +80,43 @@ const Modal = () => {
       try {
         const userSnap = await getDoc(userRef);
 
-        if (!userSnap.exists() || !userSnap.data().types) {
+        if (!userSnap.exists()) {
+          const newUser = {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            walletAddress: address,
+          };
+
+          await setDoc(userRef, newUser);
           setShowModal(false);
-          navigate("/user-dashboard");
+          setTimeout(() => {
+            navigate("/user-dashboard");
+          }, 3000);
+          setSnack({
+            message:
+              "Welcome! Your account has been successfully created. Navigating to the user dashboard...",
+            type: "success",
+          });
+        } else if (!userSnap.data().types) {
+          setShowModal(false);
+          setTimeout(() => {
+            navigate("/user-dashboard");
+          }, 3000);
+          setSnack({
+            message: "Navigation to user dashboard successful!",
+            type: "success",
+          });
         } else {
-          console.error("Change your wallet address and email");
+          setSnack({
+            message: "Change your wallet address and email",
+            type: "error",
+          });
         }
       } catch (error) {
-        console.error("Error checking user data:", error);
+        setSnack({
+          message: `Error checking user data: ${error.message}`,
+          type: "error",
+        });
       }
     }
   };
@@ -48,10 +130,14 @@ const Modal = () => {
       >
         Sign In
       </button>
-
+      <Snackbar
+        message={snack.message}
+        type={snack.type}
+        onDismiss={() => setSnack({ message: "", type: "" })}
+      />
       {showModal && (
         <div className="modal-backdrop">
-          <div className="modal modal_background">
+          <div className="modal modal_background active">
             {!currentUser && (
               <>
                 <div className="connect-wallet ">

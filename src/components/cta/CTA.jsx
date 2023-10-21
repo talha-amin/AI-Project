@@ -27,6 +27,21 @@ const CTA = ({ voiceSelector, showContent }) => {
     setUsersWithVocalize(users);
   };
 
+  let type = "";
+  switch (showContent) {
+    case 1:
+      type = "Voice";
+      break;
+    case 2:
+      type = "Script";
+      break;
+    case 3:
+      type = "Art";
+      break;
+    default:
+      type = "";
+  }
+
   useEffect(() => {
     if (voiceSelector && isUserDashboard) {
       getUsersWithVocalize();
@@ -45,11 +60,11 @@ const CTA = ({ voiceSelector, showContent }) => {
           </div>
         </div>
       )}
-      {voiceSelector && isUserDashboard && (
+      {voiceSelector && isUserDashboard && showContent && (
         <div className="gpt3__cta-user">
           <div className="gpt3__cta-content-user">
-            <p>View Different Voices Available On Our Platform</p>
-            <h3>Select a voice from our talent pool</h3>
+            <p>View Different {type} Available On Our Platform</p>
+            <h3>Select a {type} from our talent pool</h3>
           </div>
 
           <div className="gpt3__cta-content-user">

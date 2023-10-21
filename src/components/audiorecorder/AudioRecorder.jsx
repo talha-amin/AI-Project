@@ -44,7 +44,6 @@ function AudioRecorder({ isLoading, handleSave, cardText }) {
         {audioURL ? (
           <>
             <button
-              style={{ marginLeft: "100px", marginBottom: "20px" }}
               onClick={() => {
                 setAudioURL("");
                 audioChunksRef.current = [];

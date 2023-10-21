@@ -5,7 +5,7 @@ import { contractAddress, contractABI } from "../../contract";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth, storage } from "../../components/google/firebase";
-
+import { Snackbar } from "../../components/index";
 function NFTContainer() {
   const URIs = {
     Vocalize:
@@ -20,6 +20,7 @@ function NFTContainer() {
   const [minting, setMinting] = useState(false);
   const [contractConfig, setContractConfig] = useState(null);
   const [typeAvailability, setTypeAvailability] = useState({});
+  const [snack, setSnack] = useState({ message: "", type: "" }); // Snackbar state
 
   const { config: preparedConfig } = usePrepareContractWrite({
     address: contractAddress,
@@ -73,14 +74,22 @@ function NFTContainer() {
         userDoc.data().types[type] === true
       );
     } catch (error) {
-      console.error("Error checking type in storage: ", error);
+      setSnack({
+        message: `Error checking type in storage:`,
+        type: "error",
+      });
+
       return false;
     }
   }
 
   async function handleAirdrop(type) {
     if (!typeAvailability[type]) {
-      alert("Please register data first before claiming this NFT.");
+      setSnack({
+        message: `Please register data first before claiming this NFT.`,
+        type: "error",
+      });
+
       return;
     }
 
@@ -110,18 +119,29 @@ function NFTContainer() {
       });
 
       setMinting(false);
-      console.log(`${type} Minted`, mintSuccess);
+      setSnack({
+        message: `${type} Minted ${mintSuccess}`,
+        type: "success",
+      });
     } catch (error) {
-      console.error(`${type} Failed`, error);
+      setSnack({
+        message: `${type} Failed ${error.message}`,
+        type: "error",
+      });
+
       setMinting(false);
     }
   }
-  console.log({ claimedNFTs, minting, typeAvailability });
 
   return (
     <div className="gradient_bg section__padding">
       <h2 className="gradient__text nft-title">Claim Your iSai NFT</h2>
       <div className="nft-claim-section">
+        <Snackbar
+          message={snack.message}
+          type={snack.type}
+          onDismiss={() => setSnack({ message: "", type: "" })}
+        />
         {Object.keys(URIs).map((type) => (
           <div key={type} className="nft-card">
             <img

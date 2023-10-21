@@ -31,6 +31,54 @@
   margin-top: 1.5rem;
 }
 
+.gpt3__header-content button {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.5rem 1rem; /* Kept from your styles */
+  position: relative;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-weight: 500; /* Kept from your styles */
+  outline: none; /* Kept from your styles */
+}
+.gpt3__header-content button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.gpt3__header-content button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.gpt3__header-content button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
 .gpt3__header-content__input {
   width: 100%;
   margin: 2rem 0 1rem;
@@ -58,22 +106,51 @@
 }
 
 .gpt3__header-content__input button {
-  flex: 0.6;
-  width: 100%;
-  min-height: 50px;
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 28px;
-  background: #ff4820;
-  border: 2px solid #ff4820;
-  padding: 0 1rem;
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  outline: none;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.5rem 1rem; /* Kept from your styles */
+  position: relative;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-weight: 500; /* Kept from your styles */
+  outline: none; /* Kept from your styles */
+}
+.gpt3__header-content__input button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
 
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+.gpt3__header-content__input button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.gpt3__header-content__input button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 .gpt3__header-content__people {
@@ -173,6 +250,56 @@
   margin-left: 100px;
 }
 
+.gpt__card-AddButton {
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  margin-left: 450px;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.5rem 1rem; /* Kept from your styles */
+  position: relative;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-weight: 500; /* Kept from your styles */
+  outline: none; /* Kept from your styles */
+}
+
+.gpt__card-AddButton:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.gpt__card-AddButton:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.gpt3__card-AddButton:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
 .gpt3__card {
   flex: 1;
   background: transparent;
@@ -205,15 +332,53 @@
 }
 
 .gpt3__card button {
-  background-color: #ff0000; /* Red background */
-  color: #fff; /* White text color */
-  border: none;
-  padding: 10px 20px;
-  font-size: 28px;
+  align-items: center;
+  appearance: none;
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0.5rem 1rem; /* Kept from your styles */
+  position: relative;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-weight: 500; /* Kept from your styles */
+  outline: none; /* Kept from your styles */
 }
 
+.gpt3__card button:focus {
+  box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+}
+
+.gpt3__card button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.gpt3__card button:active {
+  box-shadow: #3c4fe0 0 3px 7px inset;
+  transform: translateY(2px);
+}
 @media screen and (max-width: 1050px) {
   .gpt3__cards-container {
     flex-direction: column;
@@ -261,42 +426,4 @@
   .gpt3__card {
     max-width: 90%; /* Allow the card to take up more width on very small screens */
   }
-}
-
-/* styles.css */
-.plus-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.plus-button i {
-  margin-right: 5px; /* Add spacing between the icon and text */
-}
-
-.plus-button:hover {
-  background-color: #0056b3; /* Change color on hover */
-}
-
-/* In your CSS stylesheet */
-.back-button {
-  background-color: #ff0000; /* Change to your desired background color */
-  color: #fff; /* Text color */
-  padding: 10px 20px; /* Adjust padding as needed */
-  border: none;
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer;
-  font-size: 16px; /* Font size */
-}
-
-.back-button:hover {
-  background-color: #0056b3; /* Change to a darker color on hover if desired */
-}
-
-/* Style the icon inside the button */
-.back-button i.fa {
-  margin-right: 5px; /* Adjust the margin as needed to separate the icon and text */
 }

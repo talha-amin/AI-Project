@@ -65,7 +65,12 @@ function FileUpload({ isLoading, handleSave, cardText }) {
             {files.map((file, index) => (
               <li key={index}>
                 {file.name}
-                <button onClick={() => removeFile(index)}>Remove</button>
+                <button
+                  className="remove-file"
+                  onClick={() => removeFile(index)}
+                >
+                  Remove
+                </button>
               </li>
             ))}
           </ul>

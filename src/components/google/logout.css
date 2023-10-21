@@ -1,5 +1,4 @@
-/* App.css */
-button {
+.button-29 {
   align-items: center;
   appearance: none;
   background-image: radial-gradient(
@@ -19,67 +18,34 @@ button {
   height: 48px;
   justify-content: center;
   line-height: 1;
+  list-style: none;
   overflow: hidden;
-  padding: 0.5rem 1rem; /* Kept from your styles */
+  padding-left: 16px;
+  padding-right: 16px;
   position: relative;
+  text-align: left;
   text-decoration: none;
   transition: box-shadow 0.15s, transform 0.15s;
   user-select: none;
+  -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow, transform;
-  font-weight: 500; /* Kept from your styles */
-  outline: none; /* Kept from your styles */
+  font-size: 18px;
 }
 
-button.recording {
-  transform: scale(1.1);
-  background-color: #ff5733;
-}
-
-.button:focus {
+.button-29:focus {
   box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
 }
 
-.button:hover {
+.button-29:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
-.button:active {
+.button-29:active {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
-}
-
-@media screen and (max-width: 650px) {
-  button {
-    padding: 8px 16px; /* Slightly smaller padding for smaller screens */
-    font-size: 14px; /* Smaller font size for smaller screens */
-  }
-}
-
-@media screen and (max-width: 450px) {
-  button {
-    padding: 6px 12px; /* Even smaller padding for very small screens */
-    font-size: 12px; /* Even smaller font size for very small screens */
-  }
-}
-
-.audio-recorder-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers the children horizontally */
-  gap: 20px; /* Adds space between children */
-}
-
-.audio-controls {
-  display: flex;
-  gap: 20px; /* Space between buttons */
-}
-
-.audio-playback {
-  width: 100%;
-  max-width: 400px; /* Or any other value you deem fit */
 }

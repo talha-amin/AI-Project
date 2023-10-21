@@ -39,7 +39,7 @@ const UserDasboard = () => {
               handleVoiceSelection={handleVoiceSelection}
               showContent={showContent}
             />
-            <CTA voiceSelector={voiceSelector} />
+            <CTA showContent={showContent} voiceSelector={voiceSelector} />
             <Blog />
             <Footer />
           </>

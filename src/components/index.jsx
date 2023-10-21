@@ -10,3 +10,4 @@ export { default as AuthProvider } from "./google/authprovider";
 export { default as Login } from "./google/auth";
 export { default as Logout } from "./google/logout";
 export { default as FileUpload } from "./dragdrop/DragDropContainer";
+export { default as Snackbar } from "./snackbar/snackbar";

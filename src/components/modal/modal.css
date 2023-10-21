@@ -1,16 +1,10 @@
-.gradient__text {
-  background: var(--gradient-text);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
   z-index: 1000;
   backdrop-filter: blur(3px);
   width: 100%;
@@ -24,13 +18,20 @@
 .modal {
   position: fixed;
   top: 50%;
+
   left: 50%;
+  border-radius: 10px; /* Rounded corners */
   transform: translate(-50%, -50%);
   background-color: white;
   padding: 100px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   animation: modalAppear 0.4s forwards;
+  transition: opacity 0.4s ease-in-out;
 }
+.modal.active {
+  opacity: 1;
+}
+
 .modal-close {
   position: absolute;
   top: 10px; /* Adjust as needed */
@@ -47,110 +48,6 @@
 
 .modal-close:hover {
   color: #555; /* Adjust hover color as needed */
-}
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--color-bg);
-}
-
-a {
-  color: unset;
-  text-decoration: none;
-}
-
-.gradient__bg {
-  background: -moz-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* safari 5.1+,chrome 10+ */
-  background: -webkit-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* opera 11.10+ */
-  background: -o-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* ie 10+ */
-  background: -ms-radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-
-  /* global 92%+ browsers support */
-  background: radial-gradient(
-    circle at 3% 25%,
-    rgba(0, 40, 83, 1) 0%,
-    rgba(4, 12, 24, 1) 25%
-  );
-}
-
-.gradient__text {
-  background: var(--gradient-text);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.section__padding {
-  padding: 4rem 6rem;
-}
-
-.section__margin {
-  margin: 4rem 6rem;
-}
-
-.scale-up-center {
-  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
-    both;
-  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-}
-
-@-webkit-keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-
-@keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .section__padding {
-    padding: 4rem;
-  }
-
-  .section__margin {
-    margin: 4rem;
-  }
 }
 
 .connect-wallet {
@@ -173,9 +70,26 @@ a {
   }
 }
 .modal_background {
-  background: linear-gradient(to bottom, #fff, #f2f2f2);
+  background: linear-gradient(
+      45deg,
+      #f2f2f2 25%,
+      transparent 25%,
+      transparent 75%,
+      #f2f2f2 75%
+    ),
+    linear-gradient(
+      45deg,
+      #f2f2f2 25%,
+      transparent 25%,
+      transparent 75%,
+      #f2f2f2 75%
+    );
+  background-size: 20px 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Soft box shadow */
+  border-radius: 10px; /* Rounded corners */
+  transition: background-color 0.3s ease;
 }
 
-.info-icon {
-  margin-left: 150px;
+.modal_background:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
 }

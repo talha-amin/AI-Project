@@ -10,9 +10,13 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAccount } from "wagmi";
+import { Snackbar } from "../index";
+import "./logout.css";
+import { useState } from "react";
 
 function Login() {
   const address = useAccount();
+  const [snack, setSnack] = useState({ message: "", type: "" }); // Snackbar state
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -54,15 +58,23 @@ function Login() {
         });
       }
 
-      console.log("Logged in user:", user);
+      setSnack({ message: "Logged in successfully!", type: "success" });
     } catch (error) {
-      console.error("Error:", error.message);
+      setSnack({ message: `Error: ${error.message}`, type: "error" });
     }
   };
 
   return (
     <div>
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+      <button className="button-29" onClick={signInWithGoogle}>
+        {" "}
+        Sign in with Google
+      </button>
+      <Snackbar
+        message={snack.message}
+        type={snack.type}
+        onDismiss={() => setSnack({ message: "", type: "" })}
+      />
     </div>
   );
 }

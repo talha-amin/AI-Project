@@ -129,11 +129,12 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <h1 className="gradient__text">
-              Embark on a journey where your voice, text, and art transcend
-              boundaries. With Vocalize, Scriptize, and Visionize, present them
-              as canvases, allowing podcasters to create captivating narratives
+              Embark on a journey to create something amazing
             </h1>
-            <p>Please select the talent you want to register for</p>
+            <p>
+              please select from our talent pool or upload your own work to
+              generate your podcast
+            </p>
             <div className="gpt3__cards-container">
               <div
                 className={`gpt3__card ${selectedCard === 1 ? "selected" : ""}`}
@@ -170,7 +171,6 @@ const Header = ({
               >
                 <h2 className="gradient__text">Visionize</h2>
                 <p>
-                  {" "}
                   Submit Your Artwork and Witness its Magical Transformation!{" "}
                 </p>
                 <button>Select</button>
@@ -183,7 +183,6 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
-              className="back-button"
               onClick={() => {
                 handleBackButtonClick();
               }}
@@ -196,11 +195,12 @@ const Header = ({
               realistic, captivating speech in a wide range of languages.
             </p>
             <div className="gpt3__cards-container">
-              <div className="gpt3__card">
-                <button className="plus-button" onClick={toggleVoiceLab}>
-                  <i className="fa fa-plus"></i> Add Voice
-                </button>
-              </div>
+              <button
+                className="plus-button gpt__card-AddButton "
+                onClick={toggleVoiceLab}
+              >
+                <i className="fa fa-plus"></i> Add Voice
+              </button>
             </div>
           </div>
         </div>
@@ -209,7 +209,6 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
-              className="back-button"
               onClick={() => {
                 handleBackButtonClick();
               }}
@@ -218,15 +217,16 @@ const Header = ({
             </button>
             <h1 className="gradient__text">Text Synthesis</h1>
             <p>
-              Unleash the power of our cutting-edge technology to generate
-              realistic, captivating speech in a wide range of languages.
+              Unleash the power of our cutting edge technology to create various
+              scripts
             </p>
             <div className="gpt3__cards-container">
-              <div className="gpt3__card">
-                <button className="plus-button" onClick={toggleVoiceLab}>
-                  <i className="fa fa-plus"></i> Add Text
-                </button>
-              </div>
+              <button
+                className=" gpt__card-AddButton plus-button"
+                onClick={toggleVoiceLab}
+              >
+                <i className="fa fa-plus"></i> Add Text
+              </button>
             </div>
           </div>
         </div>
@@ -235,7 +235,6 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
-              className="back-button"
               onClick={() => {
                 handleBackButtonClick();
               }}
@@ -244,15 +243,16 @@ const Header = ({
             </button>
             <h1 className="gradient__text">Art Synthesis</h1>
             <p>
-              Unleash the power of our cutting-edge technology to generate
-              realistic, captivating speech in a wide range of languages.
+              Unleash the power of our cutting edge technology to generate
+              amazing artwork
             </p>
             <div className="gpt3__cards-container">
-              <div className="gpt3__card">
-                <button className="plus-button" onClick={toggleVoiceLab}>
-                  <i className="fa fa-plus"></i> Add Art
-                </button>
-              </div>
+              <button
+                className="plus-button gpt__card-AddButton "
+                onClick={toggleVoiceLab}
+              >
+                <i className="fa fa-plus"></i> Add Art
+              </button>
             </div>
           </div>
         </div>
