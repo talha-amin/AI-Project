@@ -183,11 +183,12 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
+              marginleft="0px"
               onClick={() => {
                 handleBackButtonClick();
               }}
             >
-              <i className="fa fa-arrow-left"></i>
+              <i className="  fa fa-arrow-left"></i>
             </button>
             <h1 className="gradient__text">Speech Synthesis</h1>
             <p>
@@ -209,6 +210,7 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
+              marginleft="0px"
               onClick={() => {
                 handleBackButtonClick();
               }}
@@ -235,6 +237,7 @@ const Header = ({
         <div className="gpt3__header section__padding" id="home">
           <div className="gpt3__header-content">
             <button
+              marginleft="0px"
               onClick={() => {
                 handleBackButtonClick();
               }}

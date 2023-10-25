@@ -22,7 +22,10 @@ function Login() {
     const provider = new GoogleAuthProvider();
 
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(
+        auth,
+        provider.setCustomParameters({ prompt: "select_account" })
+      );
       const user = result.user;
 
       const walletQuery = query(

@@ -11,6 +11,7 @@ const UserDasboard = () => {
   const [voiceLab, setVoiceLab] = useState(false);
   const [showContent, setShowContent] = useState(null);
   const [voiceSelector, setVoiceSelector] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState(null);
 
   const handleVoiceSelection = () => {
     setVoiceSelector(!voiceSelector);
@@ -19,6 +20,10 @@ const UserDasboard = () => {
   const handleCloseContent = () => {
     setVoiceSelector(false);
     setVoiceLab(false);
+  };
+
+  const handleSelectedArtist = (user = null) => {
+    setSelectedArtist(user);
   };
   return (
     <div className="App">
@@ -38,8 +43,14 @@ const UserDasboard = () => {
               voiceSelector={voiceSelector}
               handleVoiceSelection={handleVoiceSelection}
               showContent={showContent}
+              selectedArtist={selectedArtist}
             />
-            <CTA showContent={showContent} voiceSelector={voiceSelector} />
+            <CTA
+              showContent={showContent}
+              voiceSelector={voiceSelector}
+              handleSelectedArtist={handleSelectedArtist}
+              selectedArtist={selectedArtist}
+            />
             <Blog />
             <Footer />
           </>

@@ -16,6 +16,7 @@ const WhatGPT3 = ({
   voiceLab,
   voiceSelector,
   handleVoiceSelection,
+  selectedArtist,
 }) => {
   const location = useLocation();
   const isTalentDashboard = location.pathname === "/talent-dashboard";
@@ -45,12 +46,20 @@ const WhatGPT3 = ({
         await updateDoc(userRef, {
           [`types.${cardText}`]: true,
         });
+        addVoice({ cardText: cardText, uploadedFile: file });
       } catch (error) {
         console.error("Error uploading file: ", error);
       }
     }
-    addVoice({ cardText: cardText });
     setIsLoading(false);
+  };
+
+  const handleSelected = () => {
+    if (!selectedArtist) {
+      return <p>Select from our talent pool below</p>;
+    } else {
+      return <p>{selectedArtist} Selected</p>;
+    }
   };
 
   let cardText = "";
@@ -162,7 +171,7 @@ const WhatGPT3 = ({
                   voiceSelector ? "fa-check-circle" : "fa-plus-circle"
                 }`}
               ></i>
-              <p>Select from our talent pool below</p>
+              {handleSelected()}
             </div>
           </div>
         </>
