@@ -56,9 +56,13 @@ const WhatGPT3 = ({
 
   const handleSelected = () => {
     if (!selectedArtist) {
-      return <p>Select from our talent pool below</p>;
+      return <p
+
+      >Select from our talent pool below</p>;
     } else {
-      return <p>{selectedArtist} Selected</p>;
+      return <p               
+
+      >{selectedArtist.displayName} Selected</p>;
     }
   };
 
