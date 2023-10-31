@@ -32,10 +32,6 @@ const CTA = ({
     setUsersWithVocalize(users);
   };
 
-  const getUserSelected = () => {
-    return users.find((user) => user.displayName === selectedArtist);
-  };
-
   let type = "";
   switch (showContent) {
     case 1:
@@ -93,7 +89,7 @@ const CTA = ({
                       iSai Talent NFT:
                       <img
                         className="gpt3__cta-content-user .nft-image"
-                        src="https://bafybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/"
+                        src="https://b  afybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/"
                         alt="Talent NFT"
                       />
                     </li>
@@ -111,21 +107,9 @@ const CTA = ({
               >
                 Choose Again
               </button>
-              <h2>{selectedArtist ? selectedArtist.displayName : null}</h2>
-              <p>
-                Wallet Address:{" "}
-                {selectedArtist ? selectedArtist.walletAddress : null}
-              </p>
-              <img
-              style={{width:"100px", height:"100px"}}
-                className="gpt3__cta-content-user .nft-image"
-                src="https://bafybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/"
-                alt="Talent NFT"
-              />
+             
             </div>
-            <div>
-            <TextUpload />
-            </div>
+            <TextUpload selectedArtist={selectedArtist} />
             </>
           )}
         </div>
