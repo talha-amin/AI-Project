@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./textupload.css"
 import { getStorage, ref, getDownloadURL,listAll } from 'firebase/storage';
+import { getDoc, doc, collection } from 'firebase/firestore';
+import { db } from '../google/firebase';
 
 function TextUpload({ selectedArtist }) {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
@@ -13,22 +15,46 @@ function TextUpload({ selectedArtist }) {
 
   useEffect(() => {
     if (selectedArtist) {
-        const storage = getStorage();
-        const audioRef = ref(storage, `${selectedArtist.id}/Vocalize/`);
+      const storage = getStorage();
+      const audioStorageRef = ref(storage, `${selectedArtist.id}/Vocalize/`);
 
-        listAll(audioRef).then(res => {
-            if (res.items.length > 0) {
-                getDownloadURL(res.items[0]).then(url => {
-                    setAudioURL(url);
-                    setLoading(false);
-                });
-            }
-        }).catch(error => {
-            console.error("Error fetching audio files:", error);
+      listAll(audioStorageRef)
+        .then((res) => {
+          if (res.items.length > 0) {
+            getDownloadURL(res.items[0])
+              .then((url) => {
+                setAudioURL(url);
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.error("Error fetching audio files:", error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching audio files:", error);
+        });
+      const artistRef = doc(db, 'users', selectedArtist.id);
+
+      getDoc(artistRef)
+        .then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const voice_id = docSnapshot.data().voice_id;
+            TextToSpeech({ voice_id, text })
+              .then((audioData) => {
+                setAudioURL(URL.createObjectURL(new Blob([audioData], { type: 'audio/mpeg' })));
+
+              })
+              .catch((error) => {
+                console.error("Error generating text-to-speech:", error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching artist data:", error);
         });
     }
-}, [selectedArtist]);
-
+  }, [selectedArtist, text]);
 const handlePlaySnippet = () => {
   if (audioRef.current) {
       setIsPlaying(true);

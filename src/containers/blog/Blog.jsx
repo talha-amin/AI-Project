@@ -8,6 +8,7 @@ const Blog = () => {
   const isLanding = location.pathname === "/";
   const isUserDashboard = location.pathname === "/user-dashboard";
 
+
   return (
     <>
       {isLanding && (
