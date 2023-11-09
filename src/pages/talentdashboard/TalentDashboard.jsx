@@ -5,22 +5,19 @@ import { useAccount } from "wagmi";
 
 const TalentDashboard = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  const { isConnected, address } = useAccount();
+  // const { isConnected, address } = useAccount();
 
   return (
     <div className="App">
       <div className="gradient__bg">
         <Navbar type="Talent" />
-        {isConnected && address && (
-          <>
-            <Header
-              selectedCard={selectedCard}
-              setSelectedCard={setSelectedCard}
-            />
-            <WhatGPT3 selectedCard={selectedCard} />
-            <NFTContainer />
-          </>
-        )}
+        {/* {isConnected && address && ( */}
+        {/* <> */}
+        <Header selectedCard={selectedCard} setSelectedCard={setSelectedCard} />
+        <WhatGPT3 selectedCard={selectedCard} />
+        <NFTContainer />
+        {/* </> */}
+        {/* )} */}b{" "}
       </div>
     </div>
   );

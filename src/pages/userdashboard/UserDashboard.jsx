@@ -25,36 +25,37 @@ const UserDasboard = () => {
   const handleSelectedArtist = (user = null) => {
     setSelectedArtist(user);
   };
+
   return (
     <div className="App">
       <div className="gradient__bg">
         <Navbar type="User" />
-        {isConnected && address && (
-          <>
-            <Header
-              voiceLab={voiceLab}
-              setVoiceLab={setVoiceLab}
-              setShowContent={setShowContent}
-              showContent={showContent}
-              onCloseContent={handleCloseContent}
-            />
-            <WhatGPT3
-              voiceLab={voiceLab}
-              voiceSelector={voiceSelector}
-              handleVoiceSelection={handleVoiceSelection}
-              showContent={showContent}
-              selectedArtist={selectedArtist}
-            />
-            <CTA
-              showContent={showContent}
-              voiceSelector={voiceSelector}
-              handleSelectedArtist={handleSelectedArtist}
-              selectedArtist={selectedArtist}
-            />
-            <Blog />
-            <Footer />
-          </>
-        )}
+        {/* {isConnected && address && ( */}
+        <>
+          <Header
+            voiceLab={voiceLab}
+            setVoiceLab={setVoiceLab}
+            setShowContent={setShowContent}
+            showContent={showContent}
+            onCloseContent={handleCloseContent}
+          />
+          <WhatGPT3
+            voiceLab={voiceLab}
+            voiceSelector={voiceSelector}
+            handleVoiceSelection={handleVoiceSelection}
+            showContent={showContent}
+            selectedArtist={selectedArtist}
+          />
+          <CTA
+            showContent={showContent}
+            voiceSelector={voiceSelector}
+            handleSelectedArtist={handleSelectedArtist}
+            selectedArtist={selectedArtist}
+          />
+          <Blog selectedArtist={selectedArtist} />
+          <Footer />
+        </>
+        {/* )} */}
       </div>
     </div>
   );

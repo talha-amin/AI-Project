@@ -5,6 +5,7 @@ import { contractAddress, contractABI } from "../../contract";
 import { usePrepareContractWrite, useContractWrite } from "wagmi";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth, storage } from "../../components/google/firebase";
+import { useAccount } from "wagmi";
 import { Snackbar } from "../../components/index";
 function NFTContainer() {
   const URIs = {
@@ -21,6 +22,7 @@ function NFTContainer() {
   const [contractConfig, setContractConfig] = useState(null);
   const [typeAvailability, setTypeAvailability] = useState({});
   const [snack, setSnack] = useState({ message: "", type: "" }); // Snackbar state
+  const { address, isConnected } = useAccount();
 
   const { config: preparedConfig } = usePrepareContractWrite({
     address: contractAddress,
@@ -93,6 +95,15 @@ function NFTContainer() {
       return;
     }
 
+    if (!address && !isConnected) {
+      setSnack({
+        message: `Please connect your wallet to claim this NFT.`,
+        type: "error",
+      });
+
+      return;
+    }
+
     if (claimedNFTs.includes(type)) {
       return;
     }
@@ -120,7 +131,7 @@ function NFTContainer() {
 
       setMinting(false);
       setSnack({
-        message: `${type} Minted ${mintSuccess}`,
+        message: `${type} Minting in progress. Click Again if Metamask does not popup.`,
         type: "success",
       });
     } catch (error) {

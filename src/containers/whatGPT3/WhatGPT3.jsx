@@ -25,7 +25,6 @@ const WhatGPT3 = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async (uploadedItems, cardText) => {
-    console.log("cardText:", cardText);
     setIsLoading(true);
     const uploadedFiles = Array.isArray(uploadedItems)
       ? uploadedItems
@@ -56,13 +55,9 @@ const WhatGPT3 = ({
 
   const handleSelected = () => {
     if (!selectedArtist) {
-      return <p
-
-      >Select from our talent pool below</p>;
+      return <p>Select from our talent pool below</p>;
     } else {
-      return <p               
-
-      >{selectedArtist.displayName} Selected</p>;
+      return <p>{selectedArtist.displayName} Selected</p>;
     }
   };
 

@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import "./modal.css";
 import { useNavigate } from "react-router-dom";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAuth } from "../google/authcontext";
 import { Login, Logout } from "../index";
-import { useAccount } from "wagmi";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db, auth } from "../../components/google/firebase";
 import { Snackbar } from "../index";
 const Modal = () => {
-  const address = useAccount();
   const [showModal, setShowModal] = useState(false);
   const [snack, setSnack] = useState({ message: "", type: "" });
 
@@ -27,7 +24,6 @@ const Modal = () => {
           const newUser = {
             uid: auth.currentUser.uid,
             email: auth.currentUser.email,
-            walletAddress: address,
           };
 
           await setDoc(userRef, newUser);
@@ -39,30 +35,11 @@ const Modal = () => {
           });
           navigate("/talent-dashboard");
         } else {
-          const userData = userSnap.data();
-          const firestoreWalletAddress = userData.walletAddress;
-          const firestoreEmail = userData.email;
-
-          const currentWalletAddress = (
-            typeof address === "string" ? address : address.address || ""
-          ).replace(/"/g, "");
-          const currentEmail = auth.currentUser.email;
-
-          if (
-            currentWalletAddress !== firestoreWalletAddress ||
-            currentEmail !== firestoreEmail
-          ) {
-            setSnack({
-              message: "Either wallet address or email does not match!",
-              type: "error",
-            });
-          } else {
-            navigate("/talent-dashboard");
-            setSnack({
-              message: "Navigation to talent dashboard successful!",
-              type: "success",
-            });
-          }
+          navigate("/talent-dashboard");
+          setSnack({
+            message: "Navigation to talent dashboard successful!",
+            type: "success",
+          });
         }
       } catch (error) {
         setSnack({
@@ -71,6 +48,11 @@ const Modal = () => {
         });
       }
     }
+    navigate("/talent-dashboard");
+    setSnack({
+      message: "Navigation to talent dashboard successful!",
+      type: "success",
+    });
   };
 
   const handleUserClick = async () => {
@@ -84,7 +66,6 @@ const Modal = () => {
           const newUser = {
             uid: auth.currentUser.uid,
             email: auth.currentUser.email,
-            walletAddress: address,
           };
 
           await setDoc(userRef, newUser);
@@ -97,7 +78,7 @@ const Modal = () => {
               "Welcome! Your account has been successfully created. Navigating to the user dashboard...",
             type: "success",
           });
-        } else if (!userSnap.data().types) {
+        } else {
           setShowModal(false);
           setTimeout(() => {
             navigate("/user-dashboard");
@@ -105,11 +86,6 @@ const Modal = () => {
           setSnack({
             message: "Navigation to user dashboard successful!",
             type: "success",
-          });
-        } else {
-          setSnack({
-            message: "Change your wallet address and email",
-            type: "error",
           });
         }
       } catch (error) {
@@ -119,6 +95,14 @@ const Modal = () => {
         });
       }
     }
+    setShowModal(false);
+    setTimeout(() => {
+      navigate("/user-dashboard");
+    }, 3000);
+    setSnack({
+      message: "Navigation to user dashboard successful!",
+      type: "success",
+    });
   };
 
   return (
@@ -140,10 +124,7 @@ const Modal = () => {
           <div className="modal modal_background active">
             {!currentUser && (
               <>
-                <div className="connect-wallet ">
-                  <ConnectButton />
-                </div>
-                <div className="login ">{address.address && <Login />}</div>
+                <div className="login ">{<Login />}</div>
               </>
             )}
             {currentUser && (

@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import "./cta.css";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../components/google/firebase";
-import {TextUpload} from "../../components/index"
+import { TextUpload } from "../../components/index";
 import { useEffect, useState } from "react";
 
 const CTA = ({
@@ -56,7 +56,6 @@ const CTA = ({
     <>
       {isLanding && (
         <div className="gpt3__cta">
-          
           <div className="gpt3__cta-content">
             <p>Request Early Access to Get Started</p>
             <h3>Register Today & start exploring the endless possibilities.</h3>
@@ -68,7 +67,6 @@ const CTA = ({
       )}
       {voiceSelector && isUserDashboard && showContent && (
         <div className="gpt3__cta-user">
-          
           {!selectedArtist ? (
             <>
               <div className="gpt3__cta-content-user">
@@ -98,18 +96,17 @@ const CTA = ({
               </div>
             </>
           ) : (
-            <>        
-                <div className="gpt3__cta-content-user">
-              <h2> Upload Your Text for a Stunning Podcast Voice Over</h2>
-              <button
-              style={{marginLeft: "500px",marginRight:"1310px"}}
-                onClick={() => handleSelectedArtist()}
-              >
-                Choose Again
-              </button>
-             
-            </div>
-            <TextUpload selectedArtist={selectedArtist} />
+            <>
+              <div className="gpt3__cta-content-user">
+                <h2> Upload Your Text for a Stunning Podcast Voice Over</h2>
+                <button
+                  style={{ marginLeft: "500px", marginRight: "1310px" }}
+                  onClick={() => handleSelectedArtist()}
+                >
+                  Choose Again
+                </button>
+              </div>
+              <TextUpload selectedArtist={selectedArtist} />
             </>
           )}
         </div>
