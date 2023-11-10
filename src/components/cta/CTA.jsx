@@ -30,6 +30,7 @@ const CTA = ({
     });
 
     setUsersWithVocalize(users);
+    console.log("users", users);
   };
 
   let type = "";

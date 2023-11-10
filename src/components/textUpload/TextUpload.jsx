@@ -27,7 +27,7 @@ function TextUpload({ selectedArtist }) {
             getDownloadURL(res.items[0])
               .then((url) => {
                 setAudioURL(url);
-                console.log("URL fetched", url); // Log the fetched URL
+                console.log("URL fetched", url);
                 setLoading(false);
               })
               .catch((error) => {
@@ -35,7 +35,7 @@ function TextUpload({ selectedArtist }) {
                 setLoading(false);
               });
           } else {
-            console.log("No audio files found for artist"); // Log when no files are found
+            console.log("No audio files found for artist");
             setLoading(false);
           }
         })
@@ -44,12 +44,10 @@ function TextUpload({ selectedArtist }) {
           setLoading(false);
         });
     }
-  }, [selectedArtist]); // Added selectedArtist to the dependency array
+  }, [selectedArtist]);
 
   const generateAudio = () => {
     setIsGenerating(true);
-    console.log("generateAudio called");
-
     const artistRef = doc(db, "users", selectedArtist.id);
 
     getDoc(artistRef)
@@ -63,7 +61,6 @@ function TextUpload({ selectedArtist }) {
               const audioBlob = new Blob([audioData], { type: "audio/mpeg" });
               const audioUrl = URL.createObjectURL(audioBlob);
               setAudioURL(audioUrl);
-              // audioRef.current.load();
               console.log("Audio generated:", audioUrl);
             })
             .catch((error) => {
@@ -91,8 +88,9 @@ function TextUpload({ selectedArtist }) {
 
   const handlePlayAudio = () => {
     if (audioRef.current) {
-      audioRef.current.src = audioURL; // Ensure the source is set to the latest URL
-      audioRef.current.load(); // Load the new audio resource
+      audioRef.current.src = audioURL;
+      console.log("audi0", audioURL);
+      audioRef.current.load();
       if (isPlaying) {
         audioRef.current.pause();
       } else {
@@ -138,9 +136,9 @@ function TextUpload({ selectedArtist }) {
               <button onClick={handlePlayAudio}>
                 {isPlaying ? "⏸ Pause" : "▶ Play"}
               </button>
-              <button href={audioURL} download="test.mp3">
+              <a href={audioURL} download="test.mp3">
                 Download Audio File
-              </button>
+              </a>
               <audio
                 ref={audioRef}
                 src={audioURL}
