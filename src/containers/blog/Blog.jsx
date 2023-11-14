@@ -25,8 +25,6 @@ const Blog = ({ selectedArtist }) => {
   });
   const { sendTransaction } = useSendTransaction(config);
 
-  console.log("Address", selectedArtist?.walletAddress);
-
   const handleRoyaltyPayment = async () => {
     console.log("Royalty payment");
     if ((!address, !isConnected)) {
@@ -45,13 +43,13 @@ const Blog = ({ selectedArtist }) => {
       return;
     }
 
-    if (!selectedArtist?.walletAddress) {
-      setSnack({
-        message: `Please Select Talent & Generate Podcast First`,
-        type: "error",
-      });
-      return;
-    }
+    // if (!selectedArtist?.walletAddress) {
+    //   setSnack({
+    //     message: `Please Select Talent & Generate Podcast First`,
+    //     type: "error",
+    //   });
+    //   return;
+    // }
 
     await sendTransaction?.();
 

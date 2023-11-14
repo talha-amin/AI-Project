@@ -121,6 +121,10 @@ function NFTContainer() {
           throw new Error("User does not exist!");
         }
 
+        if (!userDoc.data().walletAddress) {
+          transaction.update(userRef, { walletAddress: address });
+        }
+
         const currentClaimedNFTs = userDoc.data().claimedNFTs || [];
         if (!currentClaimedNFTs.includes(type)) {
           transaction.update(userRef, {

@@ -88,7 +88,7 @@ const CTA = ({
                       iSai Talent NFT:
                       <img
                         className="gpt3__cta-content-user .nft-image"
-                        src="https://b  afybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/"
+                        src="https://bafybeiejohruxjwcmccrvz6cynhnplsiaoyltmwnyklvhlo6i5evk5rwai.ipfs.nftstorage.link/"
                         alt="Talent NFT"
                       />
                     </li>
